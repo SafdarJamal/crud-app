@@ -1,88 +1,87 @@
 import React, { Component } from 'react';
 import './primitive.css';
 import './App.css';
-// import { type } from 'os';
 
 
 const employeesData = [
   {
     id: 1,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 2,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 3,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 4,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 5,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 6,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 7,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 8,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 9,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
   {
     id: 10,
-    firstName: 'Tania',
-    lastName: 'floppydiskette',
-    email: 'ex@d.com',
-    salary: '30000',
+    firstName: 'Sarah',
+    lastName: 'jane',
+    email: 'jane@example.com',
+    salary: '40000',
     date: '10-3-2019'
   },
 ];
@@ -92,7 +91,7 @@ class App extends Component {
     super(props);
     this.state = {
       email: 'admin@a.com',
-      password: 'asdf',
+      password: 'qwerty',
       isUser: false
     };
 
@@ -104,12 +103,11 @@ class App extends Component {
   adminLogin() {
     const {email, password, inputEmail, inputPassword} = this.state;
     if (inputEmail === email && inputPassword === password) {
-      alert('Admin logged in');
+      this.setState({isUser: true});
+      alert('Succesfully logged in');
       console.log('Admin logged in');
-      this.setState({isUser: true})
     } else {
-      alert("Incorrect crediantials")
-      console.log(this.state.inputEmail, this.state.inputPassword);
+      alert('Incorrect credentials');
       console.log(this.state);
     }
   }
@@ -146,18 +144,25 @@ class App extends Component {
   employeesTable() {
     return (
       <div className="container">
-        <h1>Employees Data</h1>
-        <button className="accent-button">Add</button>
-        <button onClick={() => this.logout()} className="actions">
-          Logout
-        </button>
+        <header>
+          <h1>Employees Data</h1>
+          <div className="main-btns">
+            <button>Add Employee</button>
+            <button
+              onClick={() => this.logout()}
+              className="logout-btn accent-button"
+            >
+              Logout
+            </button>
+          </div>
+        </header>
         <table>
           <thead>
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <th>Salary</th>
+              <th>Salary ($)</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -181,7 +186,7 @@ class App extends Component {
               ))
             ) : (
               <tr>
-                <td colSpan={6}>No users</td>
+                <td colSpan={6}>No Employees</td>
               </tr>
             )}
           </tbody>
@@ -192,6 +197,7 @@ class App extends Component {
 
   logout() {
     this.setState({inputEmail: "", inputPassword: "", isUser: false});
+    console.log("Logged out");
     console.log(this.state);
   }
 
