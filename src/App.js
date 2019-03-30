@@ -11,6 +11,30 @@ const list = [
     num_comments: 3,
     points: 4,
     objectId: 0
+  },
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: "Jordon Walke",
+    num_comments: 3,
+    points: 4,
+    objectId: 1
+  },
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: "Jordon Walke",
+    num_comments: 3,
+    points: 4,
+    objectId: 2
+  },
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: "Jordon Walke",
+    num_comments: 3,
+    points: 4,
+    objectId: 3
   }
 ];
 
