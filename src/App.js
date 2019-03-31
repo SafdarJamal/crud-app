@@ -88,11 +88,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      adminEmail: 'admin@a.com',
+      adminEmail: 'admin@g.com',
       adminPassword: 'qwerty',
-      isUser: true,
+      isUser: false,
       employeesData,
-      addClicked: false
+      addClicked: false,
+      editeClicked: false,
+      helper: true
     };
 
     // this.delete = this.delete.bind(this);
@@ -105,11 +107,11 @@ class App extends Component {
     const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
     if (inputEmail === adminEmail && inputPassword === adminPassword) {
       this.setState({ isUser: true });
-      // alert('Succesfully logged in');
-      console.log('Admin logged in');
+      alert('Succesfully logged in');
+      // console.log('Admin logged in');
     } else {
       alert('Incorrect credentials');
-      console.log(this.state);
+      // console.log(this.state);
     }
   }
 
@@ -123,7 +125,7 @@ class App extends Component {
             type="email"
             id="email"
             onChange={e => this.setState({ inputEmail: e.target.value })}
-            placeholder="admin@a.com"
+            placeholder="admin@g.com"
           />
           <label htmlFor="password">Password</label>
           <input
@@ -181,7 +183,12 @@ class App extends Component {
                   <td>{employee.salary}</td>
                   <td>{employee.date} </td>
                   <td>
-                    <button className="button muted-button">Edit</button>
+                    <button
+                      onClick={() => this.showUpdate(employee.id)}
+                      className="button muted-button"
+                    >
+                      Edit
+                    </button>
                     <button
                       onClick={() => this.delete(employee.id)}
                       className="button muted-button actions"
@@ -225,7 +232,7 @@ class App extends Component {
       employeesData,
       addClicked: false
     });
-    console.log(this.state.employeesData);
+    // console.log(this.state.employeesData);
   }
 
   addForm() {
@@ -282,22 +289,122 @@ class App extends Component {
       employee => employee.id !== id
     );
     this.setState({ employeesData: updatedList });
-    console.log(updatedList);
+    // console.log(updatedList);
   }
+
+  showUpdate(id) {
+    // console.log(id);
+    const userData = this.state.employeesData.filter(
+      employee => employee.id === id
+    );
+    // this.setState({ employeesData: updatedList });
+    this.setState({ helper: false, editeClicked: true, userData: userData[0] });
+    // console.log(userData[0]);
+  }
+
+  update() {
+    const {
+      firstName,
+      lastName,
+      email,
+      salary,
+      date,
+      userData,
+      employeesData
+    } = this.state;
+    const newData = {
+      id: userData.id,
+      firstName,
+      lastName,
+      email,
+      salary,
+      date
+    };
+    employeesData.map((employee, i) => {
+      employee.id === newData.id
+        ? employeesData.splice(i, 1, newData)
+        : console.log('');
+      return '';
+    });
+    this.setState({
+      employeesData,
+      editeClicked: false,
+      helper: true
+    });
+    // console.log(this.state);
+  }
+
+  updateForm() {
+    return (
+      <div className="container">
+        <form>
+          <h1>Update Employee</h1>
+          <label htmlFor="fName">First Name</label>
+          <input
+            type="text"
+            id="fName"
+            placeholder={this.state.userData.firstName}
+            onChange={e => this.setState({ firstName: e.target.value })}
+          />
+          <label htmlFor="lName">Last Name</label>
+          <input
+            type="text"
+            id="lName"
+            placeholder={this.state.userData.lastName}
+            onChange={e => this.setState({ lastName: e.target.value })}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder={this.state.userData.email}
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <label htmlFor="salary">Salary ($)</label>
+          <input
+            type="number"
+            id="salary"
+            placeholder={this.state.userData.salary}
+            onChange={e => this.setState({ salary: e.target.value })}
+          />
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            placeholder={this.state.userData.date}
+            onChange={e => this.setState({ date: e.target.value })}
+          />
+          <div className="main-btns">
+            <input type="button" onClick={() => this.update()} value="Update" />
+            <input
+              type="button"
+              onClick={() =>
+                this.setState({ editeClicked: false, helper: true })
+              }
+              value="Cancel"
+              className="accent-button cancel"
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
+
   logout() {
     this.setState({ inputEmail: '', inputPassword: '', isUser: false });
-    console.log('Logged out');
-    console.log(this.state);
+    // console.log('Logged out');
+    // console.log(this.state);
   }
 
   render() {
-    const { isUser, addClicked } = this.state;
-    console.log(this.state);
+    const { isUser, addClicked, editeClicked, helper } = this.state;
+    // console.log(this.state);
     return (
       <div>
         {!isUser && this.loginForm()}
-        {isUser && !addClicked && this.dataTables()}
+        {isUser && helper && !addClicked && this.dataTables()}
         {isUser && addClicked && this.addForm()}
+        {isUser && editeClicked && this.updateForm()}
       </div>
     );
   }
