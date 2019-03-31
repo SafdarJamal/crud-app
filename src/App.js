@@ -90,20 +90,22 @@ class App extends Component {
     this.state = {
       email: 'admin@a.com',
       password: 'qwerty',
-      isUser: false,
-      employeesData
+      isUser: true,
+      employeesData,
+      addClicked: false
     };
 
+    // this.delete = this.delete.bind(this);
     // this.adminLogin = this.adminLogin.bind(this);
-    // this.renderLogin = this.renderLogin.bind(this);
+    // this.loginForm = this.loginForm.bind(this);
     // this.logout = this.logout.bind(this);
   }
 
-  adminLogin() {
+  login() {
     const { email, password, inputEmail, inputPassword } = this.state;
     if (inputEmail === email && inputPassword === password) {
       this.setState({ isUser: true });
-      alert('Succesfully logged in');
+      // alert('Succesfully logged in');
       console.log('Admin logged in');
     } else {
       alert('Incorrect credentials');
@@ -111,7 +113,7 @@ class App extends Component {
     }
   }
 
-  renderLogin() {
+  loginForm() {
     return (
       <div className="container">
         <form>
@@ -130,23 +132,21 @@ class App extends Component {
             onChange={e => this.setState({ inputPassword: e.target.value })}
             placeholder="qwerty"
           />
-          <input
-            type="button"
-            onClick={() => this.adminLogin()}
-            value="Login"
-          />
+          <input type="button" onClick={() => this.login()} value="Login" />
         </form>
       </div>
     );
   }
 
-  employeesTable() {
+  dataTables() {
     return (
       <div className="container">
         <header>
           <h1>Employees Data</h1>
           <div className="main-btns">
-            <button>Add Employee</button>
+            <button onClick={() => this.setState({ addClicked: true })}>
+              Add Employee
+            </button>
             <button
               onClick={() => this.logout()}
               className="logout-btn accent-button"
@@ -177,7 +177,10 @@ class App extends Component {
                   <td>{employee.date} </td>
                   <td>
                     <button className="button muted-button">Edit</button>
-                    <button className="button muted-button actions">
+                    <button
+                      onClick={() => this.delete(employee.id)}
+                      className="button muted-button actions"
+                    >
                       Delete
                     </button>
                   </td>
@@ -194,6 +197,54 @@ class App extends Component {
     );
   }
 
+  addForm() {
+    return (
+      <div className="container">
+        <form>
+          <h1>Add Emplyee</h1>
+          <label htmlFor="fName">First Name</label>
+          <input
+            type="text"
+            id="fName"
+            // onChange={e => this.setState({ inputEmail: e.target.value })}
+          />
+          <label htmlFor="lName">Last Name</label>
+          <input
+            type="text"
+            id="lName"
+            // onChange={e => this.setState({ inputEmail: e.target.value })}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            // onChange={e => this.setState({ inputEmail: e.target.value })}
+          />
+          <label htmlFor="salary">Salary ($)</label>
+          <input
+            type="text"
+            id="salary"
+            // onChange={e => this.setState({ inputEmail: e.target.value })}
+          />
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            // onChange={e => this.setState({ inputEmail: e.target.value })}
+          />
+          <input type="button" onClick={() => this.add()} value="Add" />
+        </form>
+      </div>
+    );
+  }
+
+  delete(id) {
+    const updatedList = this.state.employeesData.filter(
+      employee => employee.id !== id
+    );
+    this.setState({ employeesData: updatedList });
+    console.log(updatedList);
+  }
   logout() {
     this.setState({ inputEmail: '', inputPassword: '', isUser: false });
     console.log('Logged out');
@@ -201,11 +252,12 @@ class App extends Component {
   }
 
   render() {
-    const { isUser } = this.state;
+    const { isUser, addClicked } = this.state;
     return (
       <div>
-        {!isUser && this.renderLogin()}
-        {isUser && this.employeesTable()}
+        {!isUser && this.loginForm()}
+        {isUser && !addClicked && this.dataTables()}
+        {isUser && addClicked && this.addForm()}
       </div>
     );
   }
