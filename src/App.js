@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import './primitive.css';
 import './App.css';
-
 
 const employeesData = [
   {
@@ -83,7 +81,7 @@ const employeesData = [
     email: 'jane@example.com',
     salary: '40000',
     date: '10-3-2019'
-  },
+  }
 ];
 
 class App extends Component {
@@ -92,7 +90,8 @@ class App extends Component {
     this.state = {
       email: 'admin@a.com',
       password: 'qwerty',
-      isUser: false
+      isUser: false,
+      employeesData
     };
 
     // this.adminLogin = this.adminLogin.bind(this);
@@ -101,9 +100,9 @@ class App extends Component {
   }
 
   adminLogin() {
-    const {email, password, inputEmail, inputPassword} = this.state;
+    const { email, password, inputEmail, inputPassword } = this.state;
     if (inputEmail === email && inputPassword === password) {
-      this.setState({isUser: true});
+      this.setState({ isUser: true });
       alert('Succesfully logged in');
       console.log('Admin logged in');
     } else {
@@ -129,7 +128,7 @@ class App extends Component {
             type="password"
             id="password"
             onChange={e => this.setState({ inputPassword: e.target.value })}
-            placeholder="abcdef"
+            placeholder="qwerty"
           />
           <input
             type="button"
@@ -168,8 +167,8 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {employeesData.length > 0 ? (
-              employeesData.map(employee => (
+            {this.state.employeesData.length > 0 ? (
+              this.state.employeesData.map(employee => (
                 <tr key={employee.id}>
                   <td>{employee.firstName}</td>
                   <td>{employee.lastName}</td>
@@ -196,8 +195,8 @@ class App extends Component {
   }
 
   logout() {
-    this.setState({inputEmail: "", inputPassword: "", isUser: false});
-    console.log("Logged out");
+    this.setState({ inputEmail: '', inputPassword: '', isUser: false });
+    console.log('Logged out');
     console.log(this.state);
   }
 
