@@ -88,8 +88,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'admin@a.com',
-      password: 'qwerty',
+      adminEmail: 'admin@a.com',
+      adminPassword: 'qwerty',
       isUser: true,
       employeesData,
       addClicked: false
@@ -102,8 +102,8 @@ class App extends Component {
   }
 
   login() {
-    const { email, password, inputEmail, inputPassword } = this.state;
-    if (inputEmail === email && inputPassword === password) {
+    const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
+    if (inputEmail === adminEmail && inputPassword === adminPassword) {
       this.setState({ isUser: true });
       // alert('Succesfully logged in');
       console.log('Admin logged in');
@@ -132,7 +132,12 @@ class App extends Component {
             onChange={e => this.setState({ inputPassword: e.target.value })}
             placeholder="qwerty"
           />
-          <input type="button" onClick={() => this.login()} value="Login" />
+          <input
+            type="button"
+            onClick={() => this.login()}
+            value="Login"
+            className="login-btn"
+          />
         </form>
       </div>
     );
@@ -197,6 +202,32 @@ class App extends Component {
     );
   }
 
+  add() {
+    const {
+      firstName,
+      lastName,
+      email,
+      salary,
+      date,
+      employeesData
+    } = this.state;
+    const length = this.state.employeesData.length + 1;
+    const userData = {
+      id: length,
+      firstName,
+      lastName,
+      email,
+      salary,
+      date
+    };
+    employeesData.push(userData);
+    this.setState({
+      employeesData,
+      addClicked: false
+    });
+    console.log(this.state.employeesData);
+  }
+
   addForm() {
     return (
       <div className="container">
@@ -206,33 +237,41 @@ class App extends Component {
           <input
             type="text"
             id="fName"
-            // onChange={e => this.setState({ inputEmail: e.target.value })}
+            onChange={e => this.setState({ firstName: e.target.value })}
           />
           <label htmlFor="lName">Last Name</label>
           <input
             type="text"
             id="lName"
-            // onChange={e => this.setState({ inputEmail: e.target.value })}
+            onChange={e => this.setState({ lastName: e.target.value })}
           />
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            // onChange={e => this.setState({ inputEmail: e.target.value })}
+            onChange={e => this.setState({ email: e.target.value })}
           />
           <label htmlFor="salary">Salary ($)</label>
           <input
-            type="text"
+            type="number"
             id="salary"
-            // onChange={e => this.setState({ inputEmail: e.target.value })}
+            onChange={e => this.setState({ salary: e.target.value })}
           />
           <label htmlFor="date">Date</label>
           <input
             type="date"
             id="date"
-            // onChange={e => this.setState({ inputEmail: e.target.value })}
+            onChange={e => this.setState({ date: e.target.value })}
           />
-          <input type="button" onClick={() => this.add()} value="Add" />
+          <div className="main-btns">
+            <input type="button" onClick={() => this.add()} value="Add" />
+            <input
+              type="button"
+              onClick={() => this.setState({ addClicked: false })}
+              value="Cancel"
+              className="accent-button cancel"
+            />
+          </div>
         </form>
       </div>
     );
@@ -253,6 +292,7 @@ class App extends Component {
 
   render() {
     const { isUser, addClicked } = this.state;
+    console.log(this.state);
     return (
       <div>
         {!isUser && this.loginForm()}
