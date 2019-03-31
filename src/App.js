@@ -8,7 +8,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 5,
@@ -40,7 +40,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 7,
@@ -56,7 +56,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 8,
@@ -64,7 +64,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 9,
@@ -72,7 +72,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   },
   {
     id: 10,
@@ -80,7 +80,7 @@ const employeesData = [
     lastName: 'jane',
     email: 'jane@example.com',
     salary: '40000',
-    date: '10-3-2019'
+    date: '2019-3-10'
   }
 ];
 
@@ -232,7 +232,7 @@ class App extends Component {
     return (
       <div className="container">
         <form>
-          <h1>Add Emplyee</h1>
+          <h1>Add Employee</h1>
           <label htmlFor="fName">First Name</label>
           <input
             type="text"
