@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Swal from 'sweetalert2';
 
 const employeesData = [
   {
@@ -137,11 +138,24 @@ class App extends Component {
     const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
     if (inputEmail === adminEmail && inputPassword === adminPassword) {
       this.setState({ isUser: true });
-      alert('Succesfully logged in');
-      // console.log('Admin logged in');
+      // Swal.fire('Succesfully logged in');
+      // Swal.fire('Good job!', 'Succesfully logged in', 'success');
+      Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'Succesfully logged in',
+        showConfirmButton: false,
+        timer: 1500
+      });
     } else {
-      alert('Incorrect credentials');
       // console.log(this.state);
+      // Swal.fire('Oops...', 'Incorrect credentials !', 'error');
+      Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'Incorrect credentials !',
+        showConfirmButton: true
+      });
     }
   }
 
@@ -285,11 +299,26 @@ class App extends Component {
   }
 
   delete(id) {
-    const updatedList = this.state.employeesData.filter(
-      employee => employee.id !== id
-    );
-    this.setState({ employeesData: updatedList });
-    // console.log(updatedList);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        Swal.fire('Deleted!', 'Your employee has been deleted.', 'success');
+        const updatedList = this.state.employeesData.filter(
+          employee => employee.id !== id
+        );
+        this.setState({ employeesData: updatedList });
+        // console.log(updatedList);
+      } else if (result.dismiss === 'cancel') {
+        return false;
+      }
+    });
   }
 
   showUpdate(id) {
@@ -389,9 +418,32 @@ class App extends Component {
   }
 
   logout() {
-    this.setState({ inputEmail: '', inputPassword: '', isUser: false });
-    // console.log('Logged out');
-    // console.log(this.state);
+    Swal.fire({
+      title: 'Are you sure?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, log me out!',
+      cancelButtonText: 'No, keep me in'
+    }).then(result => {
+      if (result.value) {
+        Swal.fire({
+          timer: 1500,
+          onBeforeOpen: () => {
+            Swal.showLoading();
+          },
+          onClose: () => {
+            this.setState({
+              inputEmail: '',
+              inputPassword: '',
+              isUser: false
+            });
+            // console.log(this.state);
+          }
+        });
+      }
+    });
   }
 
   render() {
