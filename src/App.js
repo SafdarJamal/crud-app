@@ -5,82 +5,82 @@ const employeesData = [
   {
     id: 1,
     firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
+    lastName: 'Edu',
+    email: 'sarah@example.com',
     salary: '40000',
     date: '2019-3-10'
   },
   {
     id: 2,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Bob',
+    lastName: 'Martin',
+    email: 'bob@example.com',
+    salary: '175000',
+    date: '2010-11-01'
   },
   {
     id: 3,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Rolf',
+    lastName: 'Hegdal',
+    email: 'rolf@example.com',
+    salary: '470000',
+    date: '2014-6-15'
   },
   {
     id: 4,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Susan',
+    lastName: 'Jordon',
+    email: 'susan@example.com',
+    salary: '68000',
+    date: '2019-2-05'
   },
   {
     id: 5,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Arsenio',
+    lastName: 'Grant',
+    email: 'arsenio@example.com',
+    salary: '68000',
+    date: '2017-4-18'
   },
   {
     id: 6,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Tim',
+    lastName: 'Fisher',
+    email: 'fisher@example.com',
+    salary: '120000',
+    date: '2014-4-19'
   },
   {
     id: 7,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Alex',
+    lastName: 'Smith',
+    email: 'alex@example.com',
+    salary: '87000',
+    date: '2012-5-07'
   },
   {
     id: 8,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Ede',
+    lastName: 'Judge',
+    email: 'ede@example.com',
+    salary: '9000',
+    date: '2018-1-20'
   },
   {
     id: 9,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Mark',
+    lastName: 'jonas',
+    email: 'mark@example.com',
+    salary: '71000',
+    date: '2017-8-27'
   },
   {
     id: 10,
-    firstName: 'Sarah',
-    lastName: 'jane',
-    email: 'jane@example.com',
-    salary: '40000',
-    date: '2019-3-10'
+    firstName: 'Sasha',
+    lastName: 'Grief',
+    email: 'sasha@example.com',
+    salary: '94000',
+    date: '2016-7-11'
   }
 ];
 
