@@ -1,7 +1,7 @@
 # Simple CRUD App with React
 
 <p align="center">
-  <img src="./public/captured.png" width="100%" alt='CRUD App in Action'>
+  <img src="./public/captured.png" width="600" alt='CRUD App in Action'>
 </p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
