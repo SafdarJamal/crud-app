@@ -8,7 +8,7 @@ const employeesData = [
     lastName: 'Edu',
     email: 'sarah@example.com',
     salary: '40000',
-    date: '2019-3-10'
+    date: '2019-03-10'
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const employeesData = [
     lastName: 'Hegdal',
     email: 'rolf@example.com',
     salary: '470000',
-    date: '2014-6-15'
+    date: '2010-06-15'
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const employeesData = [
     lastName: 'Jordon',
     email: 'susan@example.com',
     salary: '68000',
-    date: '2019-2-05'
+    date: '2019-02-05'
   },
   {
     id: 5,
@@ -40,7 +40,7 @@ const employeesData = [
     lastName: 'Grant',
     email: 'arsenio@example.com',
     salary: '68000',
-    date: '2017-4-18'
+    date: '2017-04-18'
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ const employeesData = [
     lastName: 'Fisher',
     email: 'fisher@example.com',
     salary: '120000',
-    date: '2014-4-19'
+    date: '2014-04-19'
   },
   {
     id: 7,
@@ -56,7 +56,7 @@ const employeesData = [
     lastName: 'Smith',
     email: 'alex@example.com',
     salary: '87000',
-    date: '2012-5-07'
+    date: '2012-05-07'
   },
   {
     id: 8,
@@ -64,7 +64,7 @@ const employeesData = [
     lastName: 'Judge',
     email: 'ede@example.com',
     salary: '9000',
-    date: '2018-1-20'
+    date: '2018-01-20'
   },
   {
     id: 9,
@@ -72,7 +72,7 @@ const employeesData = [
     lastName: 'jonas',
     email: 'mark@example.com',
     salary: '71000',
-    date: '2017-8-27'
+    date: '2017-08-27'
   },
   {
     id: 10,
@@ -80,7 +80,7 @@ const employeesData = [
     lastName: 'Grief',
     email: 'sasha@example.com',
     salary: '94000',
-    date: '2016-7-11'
+    date: '2016-07-11'
   }
 ];
 
@@ -88,7 +88,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      adminEmail: 'admin@g.com',
+      adminEmail: 'admin@example.com',
       adminPassword: 'qwerty',
       isUser: false,
       employeesData,
@@ -103,18 +103,6 @@ class App extends Component {
     // this.logout = this.logout.bind(this);
   }
 
-  login() {
-    const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
-    if (inputEmail === adminEmail && inputPassword === adminPassword) {
-      this.setState({ isUser: true });
-      alert('Succesfully logged in');
-      // console.log('Admin logged in');
-    } else {
-      alert('Incorrect credentials');
-      // console.log(this.state);
-    }
-  }
-
   loginForm() {
     return (
       <div className="container">
@@ -125,7 +113,7 @@ class App extends Component {
             type="email"
             id="email"
             onChange={e => this.setState({ inputEmail: e.target.value })}
-            placeholder="admin@g.com"
+            placeholder="admin@example.com"
           />
           <label htmlFor="password">Password</label>
           <input
@@ -143,6 +131,18 @@ class App extends Component {
         </form>
       </div>
     );
+  }
+
+  login() {
+    const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
+    if (inputEmail === adminEmail && inputPassword === adminPassword) {
+      this.setState({ isUser: true });
+      alert('Succesfully logged in');
+      // console.log('Admin logged in');
+    } else {
+      alert('Incorrect credentials');
+      // console.log(this.state);
+    }
   }
 
   dataTables() {
@@ -209,32 +209,6 @@ class App extends Component {
     );
   }
 
-  add() {
-    const {
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
-      employeesData
-    } = this.state;
-    const length = this.state.employeesData.length + 1;
-    const userData = {
-      id: length,
-      firstName,
-      lastName,
-      email,
-      salary,
-      date
-    };
-    employeesData.push(userData);
-    this.setState({
-      employeesData,
-      addClicked: false
-    });
-    // console.log(this.state.employeesData);
-  }
-
   addForm() {
     return (
       <div className="container">
@@ -284,6 +258,32 @@ class App extends Component {
     );
   }
 
+  add() {
+    const {
+      firstName,
+      lastName,
+      email,
+      salary,
+      date,
+      employeesData
+    } = this.state;
+    const length = this.state.employeesData.length + 1;
+    const userData = {
+      id: length,
+      firstName,
+      lastName,
+      email,
+      salary,
+      date
+    };
+    employeesData.push(userData);
+    this.setState({
+      employeesData,
+      addClicked: false
+    });
+    // console.log(this.state.employeesData);
+  }
+
   delete(id) {
     const updatedList = this.state.employeesData.filter(
       employee => employee.id !== id
@@ -293,13 +293,67 @@ class App extends Component {
   }
 
   showUpdate(id) {
-    // console.log(id);
     const userData = this.state.employeesData.filter(
       employee => employee.id === id
     );
-    // this.setState({ employeesData: updatedList });
     this.setState({ helper: false, editeClicked: true, userData: userData[0] });
     // console.log(userData[0]);
+  }
+
+  updateForm() {
+    return (
+      <div className="container">
+        <form>
+          <h1>Update Employee</h1>
+          <label htmlFor="fName">First Name</label>
+          <input
+            type="text"
+            id="fName"
+            defaultValue={this.state.userData.firstName}
+            onChange={e => this.setState({ firstName: e.target.value })}
+          />
+          <label htmlFor="lName">Last Name</label>
+          <input
+            type="text"
+            id="lName"
+            defaultValue={this.state.userData.lastName}
+            onChange={e => this.setState({ lastName: e.target.value })}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            defaultValue={this.state.userData.email}
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <label htmlFor="salary">Salary ($)</label>
+          <input
+            type="number"
+            id="salary"
+            defaultValue={this.state.userData.salary}
+            onChange={e => this.setState({ salary: e.target.value })}
+          />
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            defaultValue={this.state.userData.date}
+            onChange={e => this.setState({ date: e.target.value })}
+          />
+          <div className="main-btns">
+            <input type="button" onClick={() => this.update()} value="Update" />
+            <input
+              type="button"
+              onClick={() =>
+                this.setState({ editeClicked: false, helper: true })
+              }
+              value="Cancel"
+              className="accent-button cancel"
+            />
+          </div>
+        </form>
+      </div>
+    );
   }
 
   update() {
@@ -323,7 +377,7 @@ class App extends Component {
     employeesData.map((employee, i) => {
       employee.id === newData.id
         ? employeesData.splice(i, 1, newData)
-        : console.log('');
+        : console.log();
       return '';
     });
     this.setState({
@@ -332,62 +386,6 @@ class App extends Component {
       helper: true
     });
     // console.log(this.state);
-  }
-
-  updateForm() {
-    return (
-      <div className="container">
-        <form>
-          <h1>Update Employee</h1>
-          <label htmlFor="fName">First Name</label>
-          <input
-            type="text"
-            id="fName"
-            placeholder={this.state.userData.firstName}
-            onChange={e => this.setState({ firstName: e.target.value })}
-          />
-          <label htmlFor="lName">Last Name</label>
-          <input
-            type="text"
-            id="lName"
-            placeholder={this.state.userData.lastName}
-            onChange={e => this.setState({ lastName: e.target.value })}
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder={this.state.userData.email}
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <label htmlFor="salary">Salary ($)</label>
-          <input
-            type="number"
-            id="salary"
-            placeholder={this.state.userData.salary}
-            onChange={e => this.setState({ salary: e.target.value })}
-          />
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            placeholder={this.state.userData.date}
-            onChange={e => this.setState({ date: e.target.value })}
-          />
-          <div className="main-btns">
-            <input type="button" onClick={() => this.update()} value="Update" />
-            <input
-              type="button"
-              onClick={() =>
-                this.setState({ editeClicked: false, helper: true })
-              }
-              value="Cancel"
-              className="accent-button cancel"
-            />
-          </div>
-        </form>
-      </div>
-    );
   }
 
   logout() {
