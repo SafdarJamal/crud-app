@@ -1,4 +1,4 @@
-# Simple CRUD App with React
+# Simple CRUD App built with React
 
 <p align="center">
   <img src="./public/screenshot.png" width="650" alt='CRUD App in Action'>

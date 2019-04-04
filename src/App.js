@@ -102,7 +102,6 @@ class App extends Component {
       editeClicked: false,
       helper: true
     };
-
     // this.delete = this.delete.bind(this);
     // this.adminLogin = this.adminLogin.bind(this);
     // this.loginForm = this.loginForm.bind(this);
@@ -152,7 +151,7 @@ class App extends Component {
           Swal.fire({
             position: 'center',
             type: 'success',
-            title: 'Succesfully logged in',
+            title: 'Successfully logged in',
             showConfirmButton: false,
             timer: 1500
           });
@@ -281,7 +280,16 @@ class App extends Component {
             <input type="button" onClick={() => this.add()} value="Add" />
             <input
               type="button"
-              onClick={() => this.setState({ addClicked: false })}
+              onClick={() =>
+                this.setState({
+                  addClicked: false,
+                  firstName: '',
+                  lastName: '',
+                  email: '',
+                  salary: '',
+                  date: ''
+                })
+              }
               value="Cancel"
               className="accent-button cancel"
             />
@@ -366,6 +374,7 @@ class App extends Component {
   }
 
   delete(id) {
+    const employeesData = this.state.employeesData;
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -376,19 +385,16 @@ class App extends Component {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-        let count = id;
-        count -= 1;
+        const x = employeesData.filter(employee => employee.id === id);
         Swal.fire({
           position: 'center',
           type: 'success',
           title: 'Deleted!',
-          text: `${employeesData[count].firstName} ${
-            employeesData[count].lastName
-          } has been deleted.`,
+          text: `${x[0].firstName} ${x[0].lastName} has been deleted.`,
           showConfirmButton: false,
           timer: 1500
         });
-        const updatedList = this.state.employeesData.filter(
+        const updatedList = employeesData.filter(
           employee => employee.id !== id
         );
         // console.log(updatedList);
@@ -406,7 +412,8 @@ class App extends Component {
     this.setState({
       helper: false,
       editeClicked: true,
-      userData: userData[0],
+      // userData: userData[0],
+      id: userData[0].id,
       firstName: userData[0].firstName,
       lastName: userData[0].lastName,
       email: userData[0].email,
@@ -425,35 +432,35 @@ class App extends Component {
           <input
             type="text"
             id="fName"
-            defaultValue={this.state.userData.firstName}
+            defaultValue={this.state.firstName}
             onChange={e => this.setState({ firstName: e.target.value })}
           />
           <label htmlFor="lName">Last Name</label>
           <input
             type="text"
             id="lName"
-            defaultValue={this.state.userData.lastName}
+            defaultValue={this.state.lastName}
             onChange={e => this.setState({ lastName: e.target.value })}
           />
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            defaultValue={this.state.userData.email}
+            defaultValue={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
           />
           <label htmlFor="salary">Salary ($)</label>
           <input
             type="number"
             id="salary"
-            defaultValue={this.state.userData.salary}
+            defaultValue={this.state.salary}
             onChange={e => this.setState({ salary: e.target.value })}
           />
           <label htmlFor="date">Date</label>
           <input
             type="date"
             id="date"
-            defaultValue={this.state.userData.date}
+            defaultValue={this.state.date}
             onChange={e => this.setState({ date: e.target.value })}
           />
           <div className="main-btns">
@@ -461,7 +468,16 @@ class App extends Component {
             <input
               type="button"
               onClick={() =>
-                this.setState({ editeClicked: false, helper: true })
+                this.setState({
+                  editeClicked: false,
+                  helper: true,
+                  id: '',
+                  firstName: '',
+                  lastName: '',
+                  email: '',
+                  salary: '',
+                  date: ''
+                })
               }
               value="Cancel"
               className="accent-button cancel"
@@ -473,7 +489,7 @@ class App extends Component {
   }
 
   update() {
-    const { userData, employeesData } = this.state;
+    const { id, employeesData } = this.state;
     let { firstName, lastName, email, salary, date } = this.state;
     if (firstName === '') {
       return Swal.fire({
@@ -512,7 +528,7 @@ class App extends Component {
       });
     }
     const newData = {
-      id: userData.id,
+      id,
       firstName,
       lastName,
       email,
@@ -522,13 +538,18 @@ class App extends Component {
     employeesData.map((employee, i) => {
       employee.id === newData.id
         ? employeesData.splice(i, 1, newData)
-        : console.log();
-      return '';
+        : Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          });
+      return false;
     });
     this.setState({
       employeesData,
       editeClicked: false,
       helper: true,
+      id: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -542,7 +563,7 @@ class App extends Component {
       showConfirmButton: false,
       timer: 1500
     });
-    // console.log(this.state);
+    // console.log(this.state.employeesData);
   }
 
   logout() {
@@ -576,7 +597,6 @@ class App extends Component {
 
   render() {
     const { isUser, addClicked, editeClicked, helper } = this.state;
-    // console.log(this.state);
     return (
       <div>
         {!isUser && this.loginForm()}
