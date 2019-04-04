@@ -403,7 +403,16 @@ class App extends Component {
     const userData = this.state.employeesData.filter(
       employee => employee.id === id
     );
-    this.setState({ helper: false, editeClicked: true, userData: userData[0] });
+    this.setState({
+      helper: false,
+      editeClicked: true,
+      userData: userData[0],
+      firstName: userData[0].firstName,
+      lastName: userData[0].lastName,
+      email: userData[0].email,
+      salary: userData[0].salary,
+      date: userData[0].date
+    });
     // console.log(userData[0]);
   }
 
@@ -464,15 +473,8 @@ class App extends Component {
   }
 
   update() {
-    const {
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
-      userData,
-      employeesData
-    } = this.state;
+    const { userData, employeesData } = this.state;
+    let { firstName, lastName, email, salary, date } = this.state;
     if (firstName === '') {
       return Swal.fire({
         position: 'center',
@@ -526,7 +528,19 @@ class App extends Component {
     this.setState({
       employeesData,
       editeClicked: false,
-      helper: true
+      helper: true,
+      firstName: '',
+      lastName: '',
+      email: '',
+      salary: '',
+      date: ''
+    });
+    Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: `${firstName} ${lastName} data updated.`,
+      showConfirmButton: false,
+      timer: 1500
     });
     // console.log(this.state);
   }
