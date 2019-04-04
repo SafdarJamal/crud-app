@@ -91,6 +91,11 @@ class App extends Component {
     this.state = {
       adminEmail: 'admin@example.com',
       adminPassword: 'qwerty',
+      firstName: '',
+      lastName: '',
+      email: '',
+      salary: '',
+      date: '',
       isUser: false,
       employeesData,
       addClicked: false,
@@ -108,7 +113,7 @@ class App extends Component {
     return (
       <div className="container">
         <form>
-          <h1>Admin login</h1>
+          <h1>Admin Login</h1>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -137,24 +142,36 @@ class App extends Component {
   login() {
     const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
     if (inputEmail === adminEmail && inputPassword === adminPassword) {
-      this.setState({ isUser: true });
-      // Swal.fire('Succesfully logged in');
-      // Swal.fire('Good job!', 'Succesfully logged in', 'success');
       Swal.fire({
-        position: 'center',
-        type: 'success',
-        title: 'Succesfully logged in',
-        showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        },
+        onClose: () => {
+          this.setState({ isUser: true });
+          Swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Succesfully logged in',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
       });
     } else {
-      // console.log(this.state);
-      // Swal.fire('Oops...', 'Incorrect credentials !', 'error');
       Swal.fire({
-        position: 'center',
-        type: 'error',
-        title: 'Incorrect credentials !',
-        showConfirmButton: true
+        timer: 1500,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        },
+        onClose: () => {
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Incorrect credentials !',
+            showConfirmButton: true
+          });
+        }
       });
     }
   }
@@ -179,6 +196,7 @@ class App extends Component {
         <table>
           <thead>
             <tr>
+              <th>No.</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
@@ -189,8 +207,9 @@ class App extends Component {
           </thead>
           <tbody>
             {this.state.employeesData.length > 0 ? (
-              this.state.employeesData.map(employee => (
+              this.state.employeesData.map((employee, i) => (
                 <tr key={employee.id}>
+                  <td>{++i}</td>
                   <td>{employee.firstName}</td>
                   <td>{employee.lastName}</td>
                   <td>{employee.email}</td>
@@ -214,7 +233,7 @@ class App extends Component {
               ))
             ) : (
               <tr>
-                <td colSpan={6}>No Employees</td>
+                <td colSpan={7}>No Employees</td>
               </tr>
             )}
           </tbody>
@@ -281,6 +300,42 @@ class App extends Component {
       date,
       employeesData
     } = this.state;
+    if (firstName === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (lastName === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (email === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (salary === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (date === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    }
     const length = this.state.employeesData.length + 1;
     const userData = {
       id: length,
@@ -293,7 +348,19 @@ class App extends Component {
     employeesData.push(userData);
     this.setState({
       employeesData,
-      addClicked: false
+      addClicked: false,
+      firstName: '',
+      lastName: '',
+      email: '',
+      salary: '',
+      date: ''
+    });
+    Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: 'New employee added',
+      showConfirmButton: false,
+      timer: 1500
     });
     // console.log(this.state.employeesData);
   }
@@ -309,12 +376,23 @@ class App extends Component {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-        Swal.fire('Deleted!', 'Your employee has been deleted.', 'success');
+        let count = id;
+        count -= 1;
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Deleted!',
+          text: `${employeesData[count].firstName} ${
+            employeesData[count].lastName
+          } has been deleted.`,
+          showConfirmButton: false,
+          timer: 1500
+        });
         const updatedList = this.state.employeesData.filter(
           employee => employee.id !== id
         );
-        this.setState({ employeesData: updatedList });
         // console.log(updatedList);
+        this.setState({ employeesData: updatedList });
       } else if (result.dismiss === 'cancel') {
         return false;
       }
@@ -395,6 +473,42 @@ class App extends Component {
       userData,
       employeesData
     } = this.state;
+    if (firstName === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (lastName === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (email === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (salary === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (date === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    }
     const newData = {
       id: userData.id,
       firstName,
