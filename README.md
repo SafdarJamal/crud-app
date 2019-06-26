@@ -9,6 +9,9 @@
 email: admin@example.com
 password: qwerty
 
+- Email: admin@example.com
+- Password: qwerty
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
