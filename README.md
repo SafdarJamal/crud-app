@@ -4,6 +4,11 @@
   <img src="./screenshot.png" width="650" alt='CRUD App in Action'>
 </p>
 
+## Credentials
+
+email: admin@example.com
+password: qwerty
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
