@@ -32,4 +32,4 @@ npm install
 
 ## License
 
-This Quiz App is an open source software [licensed as MIT](https://github.com/safdarjamal/crud-app/blob/master/LICENSE).
+This CRUD App is an open source software [licensed as MIT](https://github.com/safdarjamal/crud-app/blob/master/LICENSE).
