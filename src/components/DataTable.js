@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class DataTable extends Component {
   render() {
-    const { employeesData, handleDelete } = this.props;
+    const { employeesData, handleEditClick, handleDelete } = this.props;
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -34,7 +34,7 @@ class DataTable extends Component {
                 <td>{employee.date} </td>
                 <td>
                   <button
-                    onClick={() => this.showUpdate(employee.id)}
+                    onClick={() => handleEditClick(employee.id)}
                     className="button muted-button"
                   >
                     Edit

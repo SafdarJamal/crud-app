@@ -5,6 +5,7 @@ import { EMPLOYEES_DATA } from '../constants/employeesData';
 import Header from './Header';
 import DataTable from './DataTable';
 import AddForm from './AddForm';
+import EditForm from './EditForm';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -19,11 +20,13 @@ class Dashboard extends Component {
       date: '',
       addClicked: false,
       editeClicked: false,
-      helper: true
+      selectedEmployee: null
     };
 
     this.handleAddClick = this.handleAddClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
     this.onAddSuccess = this.onAddSuccess.bind(this);
+    this.onUpdateSuccess = this.onUpdateSuccess.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
@@ -97,20 +100,63 @@ class Dashboard extends Component {
     this.setState({ addClicked: true });
   }
 
+  handleEditClick(id) {
+    const result = this.state.employeesData.filter(
+      employee => employee.id === id
+    );
+    const employee = result[0];
+
+    this.setState({ editeClicked: true, selectedEmployee: employee });
+  }
+
+  onUpdateSuccess(id, employeeData) {
+    const { employeesData } = this.state;
+
+    employeesData.map((employee, i) => {
+      id === employee.id
+        ? employeesData.splice(i, 1, employeeData)
+        : Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          });
+      return false;
+    });
+    this.setState({
+      employeesData,
+      editeClicked: false
+    });
+    Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: `${employeeData.firstName} ${employeeData.lastName} data updated.`,
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+    // console.log(this.state.employeesData);
+  }
+
   render() {
-    const { employeesData, addClicked } = this.state;
+    const {
+      employeesData,
+      addClicked,
+      editeClicked,
+      selectedEmployee
+    } = this.state;
 
     return (
       <div className="container">
-        {!addClicked && (
+        {!addClicked && !editeClicked && (
           <Header
             handleAddClick={this.handleAddClick}
             handleLogout={this.handleLogout}
           />
         )}
-        {!addClicked && (
+        {!addClicked && !editeClicked && (
           <DataTable
             employeesData={employeesData}
+            handleEditClick={this.handleEditClick}
             handleDelete={this.handleDelete}
           />
         )}
@@ -118,6 +164,12 @@ class Dashboard extends Component {
           <AddForm
             employeesData={employeesData}
             onAddSuccess={this.onAddSuccess}
+          />
+        )}
+        {editeClicked && (
+          <EditForm
+            selectedEmployee={selectedEmployee}
+            onUpdateSuccess={this.onUpdateSuccess}
           />
         )}
       </div>

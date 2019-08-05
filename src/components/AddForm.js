@@ -62,9 +62,9 @@ class AddForm extends Component {
       });
     }
 
-    const length = employeesData.length + 1;
-    const userData = {
-      id: length,
+    const id = employeesData.length + 1;
+    const newEmployeeData = {
+      id,
       firstName,
       lastName,
       email,
@@ -72,7 +72,7 @@ class AddForm extends Component {
       date
     };
 
-    employeesData.push(userData);
+    employeesData.push(newEmployeeData);
     onAddSuccess(employeesData);
 
     Swal.fire({
