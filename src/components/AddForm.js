@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 
 class AddForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      salary: null,
+      date: null
+    };
+  }
+
+  handleInputChange(propName, e) {
+    this.setState({ [propName]: e.target.value });
+  }
+
   render() {
+    const { firstName } = this.state;
+    console.log(firstName);
+
     return (
       <div className="container">
         <form>
@@ -9,32 +28,32 @@ class AddForm extends Component {
           <label htmlFor="fName">First Name</label>
           <input
             type="text"
-            id="fName"
-            onChange={e => this.setState({ firstName: e.target.value })}
+            id="firstName"
+            onChange={e => this.handleInputChange('firstName', e)}
           />
           <label htmlFor="lName">Last Name</label>
           <input
             type="text"
-            id="lName"
-            onChange={e => this.setState({ lastName: e.target.value })}
+            id="lastName"
+            onChange={e => this.handleInputChange('lastName', e)}
           />
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            onChange={e => this.setState({ email: e.target.value })}
+            onChange={e => this.handleInputChange('email', e)}
           />
           <label htmlFor="salary">Salary ($)</label>
           <input
             type="number"
             id="salary"
-            onChange={e => this.setState({ salary: e.target.value })}
+            onChange={e => this.handleInputChange('salary', e)}
           />
           <label htmlFor="date">Date</label>
           <input
             type="date"
             id="date"
-            onChange={e => this.setState({ date: e.target.value })}
+            onChange={e => this.handleInputChange('date', e)}
           />
           <div className="main-btns">
             <input type="button" onClick={() => this.add()} value="Add" />

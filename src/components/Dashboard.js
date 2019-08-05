@@ -4,6 +4,7 @@ import { EMPLOYEES_DATA } from '../constants/employeesData';
 
 import Header from './Header';
 import DataTable from './DataTable';
+import AddForm from './AddForm';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,7 +22,82 @@ class Dashboard extends Component {
       helper: true
     };
 
+    this.handleAddClick = this.handleAddClick.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  add() {
+    const {
+      firstName,
+      lastName,
+      email,
+      salary,
+      date,
+      employeesData
+    } = this.state;
+    if (firstName === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (lastName === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (email === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (salary === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (date === '') {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    }
+    const length = this.state.employeesData.length + 1;
+    const userData = {
+      id: length,
+      firstName,
+      lastName,
+      email,
+      salary,
+      date
+    };
+    employeesData.push(userData);
+    this.setState({
+      employeesData,
+      addClicked: false,
+      firstName: '',
+      lastName: '',
+      email: '',
+      salary: '',
+      date: ''
+    });
+    Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: 'New employee added',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    // console.log(this.state.employeesData);
   }
 
   delete(id) {
@@ -82,13 +158,25 @@ class Dashboard extends Component {
     });
   }
 
+  handleAddClick() {
+    this.setState({ addClicked: true });
+  }
+
   render() {
-    const { employeesData } = this.state;
+    const { employeesData, addClicked } = this.state;
 
     return (
       <div className="container">
-        <Header handleLogout={this.handleLogout} />
-        <DataTable employeesData={employeesData} delete={this.delete} />
+        {!addClicked && (
+          <Header
+            handleAddClick={this.handleAddClick}
+            handleLogout={this.handleLogout}
+          />
+        )}
+        {!addClicked && (
+          <DataTable employeesData={employeesData} delete={this.delete} />
+        )}
+        {addClicked && <AddForm />}
       </div>
     );
   }

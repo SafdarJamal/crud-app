@@ -12,12 +12,12 @@ class LoginForm extends Component {
       userEnteredPassword: null
     };
 
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  onChange(e) {
-    // console.log(e.target.name);
+  handleInputChange(propName, e) {
+    this.setState({ [propName]: e.target.value });
   }
 
   handleLogin() {
@@ -76,17 +76,15 @@ class LoginForm extends Component {
           <input
             type="email"
             id="email"
-            onChange={e => this.setState({ userEnteredEmail: e.target.value })}
             placeholder="admin@example.com"
+            onChange={e => this.handleInputChange('userEnteredEmail', e)}
           />
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            onChange={e =>
-              this.setState({ userEnteredPassword: e.target.value })
-            }
             placeholder="qwerty"
+            onChange={e => this.handleInputChange('userEnteredPassword', e)}
           />
           <input
             type="button"
