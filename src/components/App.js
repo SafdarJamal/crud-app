@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import employeesData from '../employeesData';
 import Swal from 'sweetalert2';
 
 import LoginForm from './LoginForm';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: true,
       firstName: '',
       lastName: '',
       email: '',
       salary: '',
       date: '',
-      employeesData,
       addClicked: false,
       editeClicked: false,
       helper: true
@@ -27,72 +26,6 @@ class App extends Component {
 
   onLoginSuccess() {
     this.setState({ isLoggedIn: true });
-  }
-
-  dataTables() {
-    return (
-      <div className="container">
-        <header>
-          <h1>Employees Data</h1>
-          <div className="main-btns">
-            <button onClick={() => this.setState({ addClicked: true })}>
-              Add Employee
-            </button>
-            <button
-              onClick={() => this.logout()}
-              className="logout-btn accent-button"
-            >
-              Logout
-            </button>
-          </div>
-        </header>
-        <table>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Salary ($)</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.employeesData.length > 0 ? (
-              this.state.employeesData.map((employee, i) => (
-                <tr key={employee.id}>
-                  <td>{++i}</td>
-                  <td>{employee.firstName}</td>
-                  <td>{employee.lastName}</td>
-                  <td>{employee.email}</td>
-                  <td>{employee.salary}</td>
-                  <td>{employee.date} </td>
-                  <td>
-                    <button
-                      onClick={() => this.showUpdate(employee.id)}
-                      className="button muted-button"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => this.delete(employee.id)}
-                      className="button muted-button actions"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={7}>No Employees</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    );
   }
 
   addForm() {
@@ -454,7 +387,7 @@ class App extends Component {
     return (
       <div>
         {!isLoggedIn && <LoginForm onLoginSuccess={this.onLoginSuccess} />}
-        {isLoggedIn && helper && !addClicked && this.dataTables()}
+        {isLoggedIn && helper && !addClicked && <Dashboard />}
         {isLoggedIn && addClicked && this.addForm()}
         {isLoggedIn && editeClicked && this.updateForm()}
       </div>

@@ -1,4 +1,4 @@
-const employeesData = [
+const EMPLOYEES_DATA = [
   {
     id: 1,
     firstName: 'Sarah',
@@ -81,4 +81,4 @@ const employeesData = [
   }
 ];
 
-export default employeesData;
+export { EMPLOYEES_DATA };
