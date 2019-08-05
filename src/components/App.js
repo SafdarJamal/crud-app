@@ -10,22 +10,19 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: true,
-      firstName: '',
-      lastName: '',
-      email: '',
-      salary: '',
-      date: '',
-      addClicked: false,
-      editeClicked: false,
-      helper: true
+      isLoggedIn: true
     };
 
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
+    this.onLogoutSuccess = this.onLogoutSuccess.bind(this);
   }
 
   onLoginSuccess() {
     this.setState({ isLoggedIn: true });
+  }
+
+  onLogoutSuccess() {
+    this.setState({ isLoggedIn: false });
   }
 
   add() {
@@ -230,41 +227,13 @@ class App extends Component {
     // console.log(this.state.employeesData);
   }
 
-  logout() {
-    Swal.fire({
-      title: 'Are you sure?',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, log me out!',
-      cancelButtonText: 'No, keep me in'
-    }).then(result => {
-      if (result.value) {
-        Swal.fire({
-          timer: 1500,
-          onBeforeOpen: () => {
-            Swal.showLoading();
-          },
-          onClose: () => {
-            this.setState({
-              inputEmail: '',
-              inputPassword: '',
-              isUser: false
-            });
-            // console.log(this.state);
-          }
-        });
-      }
-    });
-  }
-
   render() {
-    const { isLoggedIn, addClicked, editeClicked, helper } = this.state;
+    const { isLoggedIn } = this.state;
+
     return (
       <div>
         {!isLoggedIn && <LoginForm onLoginSuccess={this.onLoginSuccess} />}
-        {isLoggedIn && <Dashboard />}
+        {isLoggedIn && <Dashboard onLogoutSuccess={this.onLogoutSuccess} />}
         {/* {isLoggedIn && helper && !addClicked && <Dashboard />}
         {isLoggedIn && addClicked && this.addForm()}
         {isLoggedIn && editeClicked && this.updateForm()} */}

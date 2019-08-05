@@ -13,6 +13,7 @@ class LoginForm extends Component {
     };
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   onChange(e) {
