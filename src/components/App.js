@@ -3,94 +3,30 @@ import './App.css';
 import employeesData from '../employeesData';
 import Swal from 'sweetalert2';
 
+import LoginForm from './LoginForm';
+
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      adminEmail: 'admin@example.com',
-      adminPassword: 'qwerty',
+      isLoggedIn: false,
       firstName: '',
       lastName: '',
       email: '',
       salary: '',
       date: '',
-      isUser: false,
       employeesData,
       addClicked: false,
       editeClicked: false,
       helper: true
     };
-    // this.delete = this.delete.bind(this);
-    // this.adminLogin = this.adminLogin.bind(this);
-    // this.loginForm = this.loginForm.bind(this);
-    // this.logout = this.logout.bind(this);
+
+    this.onLoginSuccess = this.onLoginSuccess.bind(this);
   }
 
-  loginForm() {
-    return (
-      <div className="container">
-        <form>
-          <h1>Admin Login</h1>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            onChange={e => this.setState({ inputEmail: e.target.value })}
-            placeholder="admin@example.com"
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            onChange={e => this.setState({ inputPassword: e.target.value })}
-            placeholder="qwerty"
-          />
-          <input
-            type="button"
-            onClick={() => this.login()}
-            value="Login"
-            className="login-btn"
-          />
-        </form>
-      </div>
-    );
-  }
-
-  login() {
-    const { adminEmail, adminPassword, inputEmail, inputPassword } = this.state;
-    if (inputEmail === adminEmail && inputPassword === adminPassword) {
-      Swal.fire({
-        timer: 1500,
-        onBeforeOpen: () => {
-          Swal.showLoading();
-        },
-        onClose: () => {
-          this.setState({ isUser: true });
-          Swal.fire({
-            position: 'center',
-            type: 'success',
-            title: 'Successfully logged in',
-            showConfirmButton: false,
-            timer: 1500
-          });
-        }
-      });
-    } else {
-      Swal.fire({
-        timer: 1500,
-        onBeforeOpen: () => {
-          Swal.showLoading();
-        },
-        onClose: () => {
-          Swal.fire({
-            position: 'center',
-            type: 'error',
-            title: 'Incorrect credentials !',
-            showConfirmButton: true
-          });
-        }
-      });
-    }
+  onLoginSuccess() {
+    this.setState({ isLoggedIn: true });
   }
 
   dataTables() {
@@ -514,13 +450,13 @@ class App extends Component {
   }
 
   render() {
-    const { isUser, addClicked, editeClicked, helper } = this.state;
+    const { isLoggedIn, addClicked, editeClicked, helper } = this.state;
     return (
       <div>
-        {!isUser && this.loginForm()}
-        {isUser && helper && !addClicked && this.dataTables()}
-        {isUser && addClicked && this.addForm()}
-        {isUser && editeClicked && this.updateForm()}
+        {!isLoggedIn && <LoginForm onLoginSuccess={this.onLoginSuccess} />}
+        {isLoggedIn && helper && !addClicked && this.dataTables()}
+        {isLoggedIn && addClicked && this.addForm()}
+        {isLoggedIn && editeClicked && this.updateForm()}
       </div>
     );
   }
