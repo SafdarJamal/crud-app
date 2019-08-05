@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import employeesData from './employeesData';
+import employeesData from '../employeesData';
 import Swal from 'sweetalert2';
 
 class App extends Component {
