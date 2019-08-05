@@ -23,84 +23,19 @@ class Dashboard extends Component {
     };
 
     this.handleAddClick = this.handleAddClick.bind(this);
+    this.onAddSuccess = this.onAddSuccess.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  add() {
-    const {
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
-      employeesData
-    } = this.state;
-    if (firstName === '') {
-      return Swal.fire({
-        position: 'center',
-        type: 'error',
-        title: 'All fields are required !',
-        showConfirmButton: true
-      });
-    } else if (lastName === '') {
-      return Swal.fire({
-        position: 'center',
-        type: 'error',
-        title: 'All fields are required !',
-        showConfirmButton: true
-      });
-    } else if (email === '') {
-      return Swal.fire({
-        position: 'center',
-        type: 'error',
-        title: 'All fields are required !',
-        showConfirmButton: true
-      });
-    } else if (salary === '') {
-      return Swal.fire({
-        position: 'center',
-        type: 'error',
-        title: 'All fields are required !',
-        showConfirmButton: true
-      });
-    } else if (date === '') {
-      return Swal.fire({
-        position: 'center',
-        type: 'error',
-        title: 'All fields are required !',
-        showConfirmButton: true
-      });
-    }
-    const length = this.state.employeesData.length + 1;
-    const userData = {
-      id: length,
-      firstName,
-      lastName,
-      email,
-      salary,
-      date
-    };
-    employeesData.push(userData);
+  onAddSuccess(employeesData) {
     this.setState({
       employeesData,
-      addClicked: false,
-      firstName: '',
-      lastName: '',
-      email: '',
-      salary: '',
-      date: ''
+      addClicked: false
     });
-    Swal.fire({
-      position: 'center',
-      type: 'success',
-      title: 'New employee added',
-      showConfirmButton: false,
-      timer: 1500
-    });
-    // console.log(this.state.employeesData);
   }
 
-  delete(id) {
+  handleDelete(id) {
     const { employeesData } = this.state;
 
     Swal.fire({
@@ -174,9 +109,17 @@ class Dashboard extends Component {
           />
         )}
         {!addClicked && (
-          <DataTable employeesData={employeesData} delete={this.delete} />
+          <DataTable
+            employeesData={employeesData}
+            handleDelete={this.handleDelete}
+          />
         )}
-        {addClicked && <AddForm />}
+        {addClicked && (
+          <AddForm
+            employeesData={employeesData}
+            onAddSuccess={this.onAddSuccess}
+          />
+        )}
       </div>
     );
   }

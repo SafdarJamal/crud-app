@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 
 class AddForm extends Component {
   constructor(props) {
@@ -11,16 +12,79 @@ class AddForm extends Component {
       salary: null,
       date: null
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleInputChange(propName, e) {
     this.setState({ [propName]: e.target.value });
   }
 
-  render() {
-    const { firstName } = this.state;
-    console.log(firstName);
+  handleAdd() {
+    const { firstName, lastName, email, salary, date } = this.state;
+    const { employeesData, onAddSuccess } = this.props;
 
+    if (firstName === null) {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (lastName === null) {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (email === null) {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (salary === null) {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    } else if (date === null) {
+      return Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'All fields are required !',
+        showConfirmButton: true
+      });
+    }
+
+    const length = employeesData.length + 1;
+    const userData = {
+      id: length,
+      firstName,
+      lastName,
+      email,
+      salary,
+      date
+    };
+
+    employeesData.push(userData);
+    onAddSuccess(employeesData);
+
+    Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: 'New employee added',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  render() {
     return (
       <div className="container">
         <form>
@@ -56,7 +120,7 @@ class AddForm extends Component {
             onChange={e => this.handleInputChange('date', e)}
           />
           <div className="main-btns">
-            <input type="button" onClick={() => this.add()} value="Add" />
+            <input type="button" onClick={this.handleAdd} value="Add" />
             <input
               type="button"
               onClick={() =>

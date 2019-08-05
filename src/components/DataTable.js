@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 class DataTable extends Component {
   render() {
-    const { employeesData } = this.props;
+    const { employeesData, handleDelete } = this.props;
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: null
+    });
 
     return (
       <table>
@@ -12,7 +17,7 @@ class DataTable extends Component {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Salary ($)</th>
+            <th>Salary</th>
             <th>Date</th>
             <th>Actions</th>
           </tr>
@@ -25,7 +30,7 @@ class DataTable extends Component {
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{employee.email}</td>
-                <td>{employee.salary}</td>
+                <td>{formatter.format(employee.salary)}</td>
                 <td>{employee.date} </td>
                 <td>
                   <button
@@ -35,7 +40,7 @@ class DataTable extends Component {
                     Edit
                   </button>
                   <button
-                    onClick={() => this.delete(employee.id)}
+                    onClick={() => handleDelete(employee.id)}
                     className="button muted-button actions"
                   >
                     Delete
