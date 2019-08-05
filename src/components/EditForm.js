@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 class EditForm extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.state = {
       id: props.selectedEmployee.id,
@@ -85,7 +84,7 @@ class EditForm extends Component {
 
   render() {
     const { firstName, lastName, email, salary, date } = this.state;
-    // const { onUpdateSuccess } = this.props;
+    const { handleEditCancel } = this.props;
 
     return (
       <div className="container">
@@ -130,18 +129,7 @@ class EditForm extends Component {
             <input type="button" onClick={this.handleUpdate} value="Update" />
             <input
               type="button"
-              onClick={() =>
-                this.setState({
-                  editeClicked: false,
-                  helper: true,
-                  id: '',
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  salary: '',
-                  date: ''
-                })
-              }
+              onClick={handleEditCancel}
               value="Cancel"
               className="accent-button cancel"
             />

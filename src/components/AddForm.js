@@ -85,6 +85,8 @@ class AddForm extends Component {
   }
 
   render() {
+    const { handleAddCancel } = this.props;
+
     return (
       <div className="container">
         <form>
@@ -123,16 +125,7 @@ class AddForm extends Component {
             <input type="button" onClick={this.handleAdd} value="Add" />
             <input
               type="button"
-              onClick={() =>
-                this.setState({
-                  addClicked: false,
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  salary: '',
-                  date: ''
-                })
-              }
+              onClick={handleAddCancel}
               value="Cancel"
               className="accent-button cancel"
             />

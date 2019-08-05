@@ -13,11 +13,6 @@ class Dashboard extends Component {
 
     this.state = {
       employeesData: EMPLOYEES_DATA,
-      firstName: '',
-      lastName: '',
-      email: '',
-      salary: '',
-      date: '',
       addClicked: false,
       editeClicked: false,
       selectedEmployee: null
@@ -25,17 +20,65 @@ class Dashboard extends Component {
 
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleAddCancel = this.handleAddCancel.bind(this);
+    this.handleEditCancel = this.handleEditCancel.bind(this);
     this.onAddSuccess = this.onAddSuccess.bind(this);
     this.onUpdateSuccess = this.onUpdateSuccess.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  handleAddClick() {
+    this.setState({ addClicked: true });
+  }
+
+  handleEditClick(id) {
+    const result = this.state.employeesData.filter(
+      employee => employee.id === id
+    );
+
+    const employee = result[0];
+    this.setState({ editeClicked: true, selectedEmployee: employee });
+  }
+
+  handleAddCancel() {
+    this.setState({ addClicked: false });
+  }
+
+  handleEditCancel() {
+    this.setState({ editeClicked: false });
+  }
+
   onAddSuccess(employeesData) {
+    this.setState({ employeesData, addClicked: false });
+  }
+
+  onUpdateSuccess(id, employeeData) {
+    const { employeesData } = this.state;
+
+    employeesData.map((employee, i) => {
+      id === employee.id
+        ? employeesData.splice(i, 1, employeeData)
+        : Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          });
+      return false;
+    });
     this.setState({
       employeesData,
-      addClicked: false
+      editeClicked: false
     });
+    Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: `${employeeData.firstName} ${employeeData.lastName} data updated.`,
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+    // console.log(this.state.employeesData);
   }
 
   handleDelete(id) {
@@ -51,13 +94,14 @@ class Dashboard extends Component {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-        const x = employeesData.filter(employee => employee.id === id);
+        const result = employeesData.filter(employee => employee.id === id);
+        const employee = result[0];
 
         Swal.fire({
           position: 'center',
           type: 'success',
           title: 'Deleted!',
-          text: `${x[0].firstName} ${x[0].lastName} has been deleted.`,
+          text: `${employee.firstName} ${employee.lastName} has been deleted.`,
           showConfirmButton: false,
           timer: 1500
         });
@@ -96,47 +140,6 @@ class Dashboard extends Component {
     });
   }
 
-  handleAddClick() {
-    this.setState({ addClicked: true });
-  }
-
-  handleEditClick(id) {
-    const result = this.state.employeesData.filter(
-      employee => employee.id === id
-    );
-    const employee = result[0];
-
-    this.setState({ editeClicked: true, selectedEmployee: employee });
-  }
-
-  onUpdateSuccess(id, employeeData) {
-    const { employeesData } = this.state;
-
-    employeesData.map((employee, i) => {
-      id === employee.id
-        ? employeesData.splice(i, 1, employeeData)
-        : Swal.fire({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!'
-          });
-      return false;
-    });
-    this.setState({
-      employeesData,
-      editeClicked: false
-    });
-    Swal.fire({
-      position: 'center',
-      type: 'success',
-      title: `${employeeData.firstName} ${employeeData.lastName} data updated.`,
-      showConfirmButton: false,
-      timer: 1500
-    });
-
-    // console.log(this.state.employeesData);
-  }
-
   render() {
     const {
       employeesData,
@@ -164,12 +167,14 @@ class Dashboard extends Component {
           <AddForm
             employeesData={employeesData}
             onAddSuccess={this.onAddSuccess}
+            handleAddCancel={this.handleAddCancel}
           />
         )}
         {editeClicked && (
           <EditForm
             selectedEmployee={selectedEmployee}
             onUpdateSuccess={this.onUpdateSuccess}
+            handleEditCancel={this.handleEditCancel}
           />
         )}
       </div>
