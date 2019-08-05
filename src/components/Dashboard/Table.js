@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DataTable extends Component {
+class Table extends Component {
   render() {
     const { employeesData, handleEditClick, handleDelete } = this.props;
     const formatter = new Intl.NumberFormat('en-US', {
@@ -59,4 +59,4 @@ class DataTable extends Component {
   }
 }
 
-export default DataTable;
+export default Table;

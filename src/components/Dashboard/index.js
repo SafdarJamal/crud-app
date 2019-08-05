@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-import { EMPLOYEES_DATA } from '../constants/employeesData';
+import { EMPLOYEES_DATA } from '../../constants/employeesData';
 
 import Header from './Header';
-import DataTable from './DataTable';
-import AddForm from './AddForm';
-import EditForm from './EditForm';
+import Table from './Table';
+import Add from './Add';
+import Edit from './Edit';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -157,21 +157,21 @@ class Dashboard extends Component {
           />
         )}
         {!addClicked && !editeClicked && (
-          <DataTable
+          <Table
             employeesData={employeesData}
             handleEditClick={this.handleEditClick}
             handleDelete={this.handleDelete}
           />
         )}
         {addClicked && (
-          <AddForm
+          <Add
             employeesData={employeesData}
             onAddSuccess={this.onAddSuccess}
             handleAddCancel={this.handleAddCancel}
           />
         )}
         {editeClicked && (
-          <EditForm
+          <Edit
             selectedEmployee={selectedEmployee}
             onUpdateSuccess={this.onUpdateSuccess}
             handleEditCancel={this.handleEditCancel}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import LoginForm from './LoginForm';
+import Login from './Login';
 import Dashboard from './Dashboard';
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
 
     return (
       <div>
-        {!isLoggedIn && <LoginForm onLoginSuccess={this.onLoginSuccess} />}
+        {!isLoggedIn && <Login onLoginSuccess={this.onLoginSuccess} />}
         {isLoggedIn && <Dashboard onLogoutSuccess={this.onLogoutSuccess} />}
       </div>
     );

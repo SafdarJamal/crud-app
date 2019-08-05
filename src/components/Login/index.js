@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 
-class LoginForm extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -98,4 +98,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default Login;
