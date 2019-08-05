@@ -28,64 +28,6 @@ class App extends Component {
     this.setState({ isLoggedIn: true });
   }
 
-  addForm() {
-    return (
-      <div className="container">
-        <form>
-          <h1>Add Employee</h1>
-          <label htmlFor="fName">First Name</label>
-          <input
-            type="text"
-            id="fName"
-            onChange={e => this.setState({ firstName: e.target.value })}
-          />
-          <label htmlFor="lName">Last Name</label>
-          <input
-            type="text"
-            id="lName"
-            onChange={e => this.setState({ lastName: e.target.value })}
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <label htmlFor="salary">Salary ($)</label>
-          <input
-            type="number"
-            id="salary"
-            onChange={e => this.setState({ salary: e.target.value })}
-          />
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            onChange={e => this.setState({ date: e.target.value })}
-          />
-          <div className="main-btns">
-            <input type="button" onClick={() => this.add()} value="Add" />
-            <input
-              type="button"
-              onClick={() =>
-                this.setState({
-                  addClicked: false,
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  salary: '',
-                  date: ''
-                })
-              }
-              value="Cancel"
-              className="accent-button cancel"
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-
   add() {
     const {
       firstName,
@@ -210,71 +152,6 @@ class App extends Component {
     // console.log(userData[0]);
   }
 
-  updateForm() {
-    return (
-      <div className="container">
-        <form>
-          <h1>Update Employee</h1>
-          <label htmlFor="fName">First Name</label>
-          <input
-            type="text"
-            id="fName"
-            defaultValue={this.state.firstName}
-            onChange={e => this.setState({ firstName: e.target.value })}
-          />
-          <label htmlFor="lName">Last Name</label>
-          <input
-            type="text"
-            id="lName"
-            defaultValue={this.state.lastName}
-            onChange={e => this.setState({ lastName: e.target.value })}
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            defaultValue={this.state.email}
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <label htmlFor="salary">Salary ($)</label>
-          <input
-            type="number"
-            id="salary"
-            defaultValue={this.state.salary}
-            onChange={e => this.setState({ salary: e.target.value })}
-          />
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            defaultValue={this.state.date}
-            onChange={e => this.setState({ date: e.target.value })}
-          />
-          <div className="main-btns">
-            <input type="button" onClick={() => this.update()} value="Update" />
-            <input
-              type="button"
-              onClick={() =>
-                this.setState({
-                  editeClicked: false,
-                  helper: true,
-                  id: '',
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  salary: '',
-                  date: ''
-                })
-              }
-              value="Cancel"
-              className="accent-button cancel"
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-
   update() {
     const { id, employeesData } = this.state;
     let { firstName, lastName, email, salary, date } = this.state;
@@ -387,9 +264,10 @@ class App extends Component {
     return (
       <div>
         {!isLoggedIn && <LoginForm onLoginSuccess={this.onLoginSuccess} />}
-        {isLoggedIn && helper && !addClicked && <Dashboard />}
+        {isLoggedIn && <Dashboard />}
+        {/* {isLoggedIn && helper && !addClicked && <Dashboard />}
         {isLoggedIn && addClicked && this.addForm()}
-        {isLoggedIn && editeClicked && this.updateForm()}
+        {isLoggedIn && editeClicked && this.updateForm()} */}
       </div>
     );
   }
