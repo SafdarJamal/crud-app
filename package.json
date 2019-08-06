@@ -1,13 +1,13 @@
 {
   "name": "crud-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "homepage": "https://safdarjamal.github.io/crud-app",
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8",
-    "sweetalert2": "^8.8.1"
+    "react-scripts": "3.0.1",
+    "sweetalert2": "^8.15.2"
   },
   "scripts": {
     "start": "react-scripts start",
