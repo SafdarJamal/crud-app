@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+import './index.css';
 
-import Login from './Login';
-import Dashboard from './Dashboard';
+import Login from '../Login';
+import Dashboard from '../Dashboard';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: true
     };
 
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
