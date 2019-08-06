@@ -69,7 +69,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="small-container">
         <form>
           <h1>Admin Login</h1>
           <label htmlFor="email">Email</label>
