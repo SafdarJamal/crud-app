@@ -1,7 +1,7 @@
 # CRUD App built with React
 
 <p align="center">
-  <img src="./screenshot.png" width="650" alt='CRUD App in Action'>
+  <img src="./screenshot.png" alt='CRUD App in Action'>
 </p>
 
 ## Credentials
