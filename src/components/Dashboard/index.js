@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-import { EMPLOYEES_DATA } from '../../constants/employeesData';
+import { EMPLOYEES_DATA } from '../../data/employees';
 
 import Header from './Header';
 import Table from './Table';
