@@ -1,4 +1,4 @@
-# Simple CRUD App built with React
+# CRUD App built with React
 
 <p align="center">
   <img src="./screenshot.png" width="650" alt='CRUD App in Action'>
@@ -8,6 +8,10 @@
 
 - Email: admin@example.com
 - Password: qwerty
+
+## Demo
+
+- [CRUD-App](https://safdarjamal.github.io/crud-app)
 
 ---
 
@@ -25,10 +29,6 @@ npm install
 - `npm run build` - build into the `build/` directory
 - `npm test` - Start the test runner
 - `npm run eject` - If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-## Demo
-
-- [CRUD-App](https://safdarjamal.github.io/crud-app)
 
 ## License
 
