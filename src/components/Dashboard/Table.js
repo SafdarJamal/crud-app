@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 class Table extends Component {
   render() {
     const { employeesData, handleEditClick, handleDelete } = this.props;
+
+    for (let i = 0; i < employeesData.length; i++) {
+      employeesData[i].id = i + 1;
+    }
+
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -29,7 +34,7 @@ class Table extends Component {
             {employeesData.length > 0 ? (
               employeesData.map((employee, i) => (
                 <tr key={employee.id}>
-                  <td>{++i}</td>
+                  <td>{i + 1}</td>
                   <td>{employee.firstName}</td>
                   <td>{employee.lastName}</td>
                   <td>{employee.email}</td>

@@ -1,6 +1,5 @@
 const EMPLOYEES_DATA = [
   {
-    id: 1,
     firstName: 'Susan',
     lastName: 'Jordon',
     email: 'susan@example.com',
@@ -8,7 +7,6 @@ const EMPLOYEES_DATA = [
     date: '2019-02-05'
   },
   {
-    id: 2,
     firstName: 'Clark',
     lastName: 'Kent',
     email: 'clark@example.com',
@@ -16,7 +14,6 @@ const EMPLOYEES_DATA = [
     date: '2010-11-01'
   },
   {
-    id: 3,
     firstName: 'Rolf',
     lastName: 'Hegdal',
     email: 'rolf@example.com',
@@ -24,7 +21,6 @@ const EMPLOYEES_DATA = [
     date: '2010-06-15'
   },
   {
-    id: 4,
     firstName: 'diana',
     lastName: 'prince',
     email: 'diana@example.com',
@@ -32,7 +28,6 @@ const EMPLOYEES_DATA = [
     date: '2019-03-10'
   },
   {
-    id: 5,
     firstName: 'Arsenio',
     lastName: 'Grant',
     email: 'arsenio@example.com',
@@ -40,7 +35,6 @@ const EMPLOYEES_DATA = [
     date: '2017-04-18'
   },
   {
-    id: 6,
     firstName: 'Tim',
     lastName: 'Fisher',
     email: 'fisher@example.com',
@@ -48,7 +42,6 @@ const EMPLOYEES_DATA = [
     date: '2014-04-19'
   },
   {
-    id: 7,
     firstName: 'Alex',
     lastName: 'Smith',
     email: 'alex@example.com',
@@ -56,7 +49,6 @@ const EMPLOYEES_DATA = [
     date: '2012-05-07'
   },
   {
-    id: 8,
     firstName: 'Ede',
     lastName: 'Judge',
     email: 'ede@example.com',
@@ -64,7 +56,6 @@ const EMPLOYEES_DATA = [
     date: '2018-01-20'
   },
   {
-    id: 9,
     firstName: 'Mark',
     lastName: 'jonas',
     email: 'mark@example.com',
@@ -72,7 +63,6 @@ const EMPLOYEES_DATA = [
     date: '2017-08-27'
   },
   {
-    id: 10,
     firstName: 'Bruce',
     lastName: 'Wayne',
     email: 'bruce@example.com',
