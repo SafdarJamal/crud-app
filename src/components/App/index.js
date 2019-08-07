@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     };
 
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
