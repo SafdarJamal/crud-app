@@ -4,9 +4,9 @@
   "private": true,
   "homepage": "https://safdarjamal.github.io/crud-app",
   "dependencies": {
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
     "sweetalert2": "^8.19.0"
   },
   "scripts": {
