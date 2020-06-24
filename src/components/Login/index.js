@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const Login = ({ onLoginSuccess }) => {
+const Login = ({ setIsAuthenticated }) => {
   const adminEmail = 'admin@example.com';
   const adminPassword = 'qwerty';
 
-  const [userEnteredEmail, setUserEnteredEmail] = useState(null);
-  const [userEnteredPassword, setUserEnteredPassword] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-  const handleLogin = () => {
-    if (
-      userEnteredEmail === adminEmail &&
-      userEnteredPassword === adminPassword
-    ) {
+  const handleLogin = e => {
+    e.preventDefault();
+
+    if (email === adminEmail && password === adminPassword) {
       Swal.fire({
         timer: 1500,
         onBeforeOpen: () => {
           Swal.showLoading();
         },
         onClose: () => {
-          onLoginSuccess();
+          setIsAuthenticated(true);
 
           Swal.fire({
-            position: 'center',
             icon: 'success',
             title: 'Successfully logged in',
+            position: 'center',
             showConfirmButton: false,
             timer: 1500
           });
@@ -38,9 +37,9 @@ const Login = ({ onLoginSuccess }) => {
         },
         onClose: () => {
           Swal.fire({
-            position: 'center',
             icon: 'error',
-            title: 'Incorrect credentials !',
+            title: 'Incorrect email or password.',
+            position: 'center',
             showConfirmButton: true
           });
         }
@@ -50,28 +49,27 @@ const Login = ({ onLoginSuccess }) => {
 
   return (
     <div className="small-container">
-      <form>
+      <form onSubmit={handleLogin}>
         <h1>Admin Login</h1>
         <label htmlFor="email">Email</label>
         <input
-          type="email"
           id="email"
+          type="email"
+          name="email"
           placeholder="admin@example.com"
-          onChange={e => setUserEnteredEmail(e.target.value)}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
-          type="password"
           id="password"
+          type="password"
+          name="password"
           placeholder="qwerty"
-          onChange={e => setUserEnteredPassword(e.target.value)}
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
-        <input
-          type="button"
-          value="Login"
-          style={{ marginTop: '12px' }}
-          onClick={handleLogin}
-        />
+        <input style={{ marginTop: '12px' }} type="submit" value="Login" />
       </form>
     </div>
   );
