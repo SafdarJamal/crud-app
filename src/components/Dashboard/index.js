@@ -97,34 +97,13 @@ const Dashboard = ({ onLogoutSuccess }) => {
     });
   };
 
-  const handleLogout = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, log me out!',
-      cancelButtonText: 'No, keep me in'
-    }).then(result => {
-      if (result.value) {
-        Swal.fire({
-          timer: 1500,
-          onBeforeOpen: () => {
-            Swal.showLoading();
-          },
-          onClose: () => {
-            onLogoutSuccess();
-          }
-        });
-      }
-    });
-  };
-
   return (
     <div className="container">
       {!addClicked && !editeClicked && (
-        <Header handleAddClick={handleAddClick} handleLogout={handleLogout} />
+        <Header
+          handleAddClick={handleAddClick}
+          onLogoutSuccess={onLogoutSuccess}
+        />
       )}
       {!addClicked && !editeClicked && (
         <Table
