@@ -1,33 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
+const Login = ({ onLoginSuccess }) => {
+  const adminEmail = 'admin@example.com';
+  const adminPassword = 'qwerty';
 
-    this.state = {
-      adminEmail: 'admin@example.com',
-      adminPassword: 'qwerty',
-      userEnteredEmail: null,
-      userEnteredPassword: null
-    };
+  const [userEnteredEmail, setUserEnteredEmail] = useState(null);
+  const [userEnteredPassword, setUserEnteredPassword] = useState(null);
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
-  }
-
-  handleInputChange(propName, e) {
-    this.setState({ [propName]: e.target.value });
-  }
-
-  handleLogin() {
-    const {
-      adminEmail,
-      adminPassword,
-      userEnteredEmail,
-      userEnteredPassword
-    } = this.state;
-
+  const handleLogin = () => {
     if (
       userEnteredEmail === adminEmail &&
       userEnteredPassword === adminPassword
@@ -38,11 +19,11 @@ class Login extends Component {
           Swal.showLoading();
         },
         onClose: () => {
-          this.props.onLoginSuccess();
+          onLoginSuccess();
 
           Swal.fire({
             position: 'center',
-            type: 'success',
+            icon: 'success',
             title: 'Successfully logged in',
             showConfirmButton: false,
             timer: 1500
@@ -58,44 +39,42 @@ class Login extends Component {
         onClose: () => {
           Swal.fire({
             position: 'center',
-            type: 'error',
+            icon: 'error',
             title: 'Incorrect credentials !',
             showConfirmButton: true
           });
         }
       });
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="small-container">
-        <form>
-          <h1>Admin Login</h1>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="admin@example.com"
-            onChange={e => this.handleInputChange('userEnteredEmail', e)}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="qwerty"
-            onChange={e => this.handleInputChange('userEnteredPassword', e)}
-          />
-          <input
-            type="button"
-            onClick={this.handleLogin}
-            value="Login"
-            className="login-btn"
-          />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="small-container">
+      <form>
+        <h1>Admin Login</h1>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="admin@example.com"
+          onChange={e => setUserEnteredEmail(e.target.value)}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="qwerty"
+          onChange={e => setUserEnteredPassword(e.target.value)}
+        />
+        <input
+          type="button"
+          value="Login"
+          style={{ marginTop: '12px' }}
+          onClick={handleLogin}
+        />
+      </form>
+    </div>
+  );
+};
 
 export default Login;
