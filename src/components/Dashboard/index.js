@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { EMPLOYEES_DATA } from '../../data/employees';
 
@@ -7,87 +7,68 @@ import Table from './Table';
 import Add from './Add';
 import Edit from './Edit';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
+const Dashboard = ({ onLogoutSuccess }) => {
+  const [employeesData, setEmployeesData] = useState(EMPLOYEES_DATA);
+  const [addClicked, setAddClicked] = useState(false);
+  const [editeClicked, setEditClicked] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-    this.state = {
-      employeesData: EMPLOYEES_DATA,
-      addClicked: false,
-      editeClicked: false,
-      selectedEmployee: null
-    };
+  const handleAddClick = () => {
+    setAddClicked(true);
+  };
 
-    this.handleAddClick = this.handleAddClick.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
-    this.handleAddCancel = this.handleAddCancel.bind(this);
-    this.handleEditCancel = this.handleEditCancel.bind(this);
-    this.onAddSuccess = this.onAddSuccess.bind(this);
-    this.onUpdateSuccess = this.onUpdateSuccess.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  handleAddClick() {
-    this.setState({ addClicked: true });
-  }
-
-  handleEditClick(id) {
-    const result = this.state.employeesData.filter(
-      employee => employee.id === id
-    );
+  const handleEditClick = id => {
+    const result = employeesData.filter(employee => employee.id === id);
 
     const employee = result[0];
-    this.setState({ editeClicked: true, selectedEmployee: employee });
-  }
+    setEditClicked(true);
+    setSelectedEmployee(employee);
+  };
 
-  handleAddCancel() {
-    this.setState({ addClicked: false });
-  }
+  const handleAddCancel = () => {
+    setAddClicked(false);
+  };
 
-  handleEditCancel() {
-    this.setState({ editeClicked: false });
-  }
+  const handleEditCancel = () => {
+    setEditClicked(false);
+  };
 
-  onAddSuccess(employeesData) {
-    this.setState({ employeesData, addClicked: false });
-  }
+  const onAddSuccess = employeesData => {
+    setEmployeesData(employeesData);
+    setAddClicked(false);
+  };
 
-  onUpdateSuccess(id, employeeData) {
-    const { employeesData } = this.state;
-
+  const onUpdateSuccess = (id, employeeData) => {
     employeesData.map((employee, i) => {
       id === employee.id
         ? employeesData.splice(i, 1, employeeData)
         : Swal.fire({
-            type: 'error',
+            icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!'
           });
       return false;
     });
-    this.setState({
-      employeesData,
-      editeClicked: false
-    });
+
+    setEmployeesData(employeesData);
+    setEditClicked(false);
+
     Swal.fire({
       position: 'center',
-      type: 'success',
+      icon: 'success',
       title: `${employeeData.firstName} ${employeeData.lastName} data updated.`,
       showConfirmButton: false,
       timer: 1500
     });
 
-    // console.log(this.state.employeesData);
-  }
+    // console.log(employeesData);
+  };
 
-  handleDelete(id) {
-    const { employeesData } = this.state;
-
+  const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      type: 'warning',
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -99,7 +80,7 @@ class Dashboard extends Component {
 
         Swal.fire({
           position: 'center',
-          type: 'success',
+          icon: 'success',
           title: 'Deleted!',
           text: `${employee.firstName} ${employee.lastName} has been deleted.`,
           showConfirmButton: false,
@@ -111,18 +92,18 @@ class Dashboard extends Component {
         );
 
         // console.log(updatedList);
-        this.setState({ employeesData: updatedList });
+        setEmployeesData(updatedList);
       }
     });
-  }
+  };
 
-  handleLogout() {
+  const handleLogout = () => {
     Swal.fire({
       title: 'Are you sure?',
-      type: 'warning',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, log me out!',
       cancelButtonText: 'No, keep me in'
     }).then(result => {
@@ -133,53 +114,41 @@ class Dashboard extends Component {
             Swal.showLoading();
           },
           onClose: () => {
-            this.props.onLogoutSuccess();
+            onLogoutSuccess();
           }
         });
       }
     });
-  }
+  };
 
-  render() {
-    const {
-      employeesData,
-      addClicked,
-      editeClicked,
-      selectedEmployee
-    } = this.state;
-
-    return (
-      <div className="container">
-        {!addClicked && !editeClicked && (
-          <Header
-            handleAddClick={this.handleAddClick}
-            handleLogout={this.handleLogout}
-          />
-        )}
-        {!addClicked && !editeClicked && (
-          <Table
-            employeesData={employeesData}
-            handleEditClick={this.handleEditClick}
-            handleDelete={this.handleDelete}
-          />
-        )}
-        {addClicked && (
-          <Add
-            employeesData={employeesData}
-            onAddSuccess={this.onAddSuccess}
-            handleAddCancel={this.handleAddCancel}
-          />
-        )}
-        {editeClicked && (
-          <Edit
-            selectedEmployee={selectedEmployee}
-            onUpdateSuccess={this.onUpdateSuccess}
-            handleEditCancel={this.handleEditCancel}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      {!addClicked && !editeClicked && (
+        <Header handleAddClick={handleAddClick} handleLogout={handleLogout} />
+      )}
+      {!addClicked && !editeClicked && (
+        <Table
+          employeesData={employeesData}
+          handleEditClick={handleEditClick}
+          handleDelete={handleDelete}
+        />
+      )}
+      {addClicked && (
+        <Add
+          employeesData={employeesData}
+          onAddSuccess={onAddSuccess}
+          handleAddCancel={handleAddCancel}
+        />
+      )}
+      {editeClicked && (
+        <Edit
+          selectedEmployee={selectedEmployee}
+          onUpdateSuccess={onUpdateSuccess}
+          handleEditCancel={handleEditCancel}
+        />
+      )}
+    </div>
+  );
+};
 
 export default Dashboard;
