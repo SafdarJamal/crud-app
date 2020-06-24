@@ -1,39 +1,25 @@
-import React, { Component } from 'react';
-import './style.css';
+import React, { useState } from 'react';
 
 import Login from '../Login';
 import Dashboard from '../Dashboard';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-    this.state = {
-      isLoggedIn: false
-    };
+  const onLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
 
-    this.onLoginSuccess = this.onLoginSuccess.bind(this);
-    this.onLogoutSuccess = this.onLogoutSuccess.bind(this);
-  }
+  const onLogoutSuccess = () => {
+    setIsLoggedIn(false);
+  };
 
-  onLoginSuccess() {
-    this.setState({ isLoggedIn: true });
-  }
-
-  onLogoutSuccess() {
-    this.setState({ isLoggedIn: false });
-  }
-
-  render() {
-    const { isLoggedIn } = this.state;
-
-    return (
-      <div>
-        {!isLoggedIn && <Login onLoginSuccess={this.onLoginSuccess} />}
-        {isLoggedIn && <Dashboard onLogoutSuccess={this.onLogoutSuccess} />}
-      </div>
-    );
-  }
-}
+  return (
+    <>
+      {!isLoggedIn && <Login onLoginSuccess={onLoginSuccess} />}
+      {isLoggedIn && <Dashboard onLogoutSuccess={onLogoutSuccess} />}
+    </>
+  );
+};
 
 export default App;
