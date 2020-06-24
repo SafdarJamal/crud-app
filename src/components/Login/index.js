@@ -5,8 +5,8 @@ const Login = ({ setIsAuthenticated }) => {
   const adminEmail = 'admin@example.com';
   const adminPassword = 'qwerty';
 
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = e => {
     e.preventDefault();
