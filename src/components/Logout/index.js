@@ -1,16 +1,14 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 
-const Logout = ({ onLogoutSuccess }) => {
+const Logout = ({ setIsAuthenticated }) => {
   const handleLogout = () => {
     Swal.fire({
+      icon: 'question',
       title: 'Are you sure?',
-      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, log me out!',
-      cancelButtonText: 'No, keep me in'
+      cancelButtonText: 'No, keep me in!'
     }).then(result => {
       if (result.value) {
         Swal.fire({
@@ -19,7 +17,7 @@ const Logout = ({ onLogoutSuccess }) => {
             Swal.showLoading();
           },
           onClose: () => {
-            onLogoutSuccess();
+            setIsAuthenticated(false);
           }
         });
       }

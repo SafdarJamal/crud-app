@@ -22,7 +22,7 @@ const Login = ({ setIsAuthenticated }) => {
 
           Swal.fire({
             icon: 'success',
-            title: 'Successfully logged in',
+            title: 'Successfully logged in.',
             position: 'center',
             showConfirmButton: false,
             timer: 1500
@@ -38,7 +38,7 @@ const Login = ({ setIsAuthenticated }) => {
         onClose: () => {
           Swal.fire({
             icon: 'error',
-            title: 'Incorrect email or password.',
+            title: 'Incorrect email or password!',
             position: 'center',
             showConfirmButton: true
           });
