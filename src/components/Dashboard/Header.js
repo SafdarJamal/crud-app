@@ -1,18 +1,14 @@
 import React from 'react';
 
-const Header = ({ handleAddClick, handleLogout }) => {
+import Logout from '../Logout';
+
+const Header = ({ handleAddClick, onLogoutSuccess }) => {
   return (
     <header>
       <h1>Employees Data</h1>
       <div style={{ marginTop: '30px', marginBottom: '18px' }}>
         <button onClick={handleAddClick}>Add Employee</button>
-        <button
-          style={{ marginLeft: '12px' }}
-          className="muted-button"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        <Logout onLogoutSuccess={onLogoutSuccess} />
       </div>
     </header>
   );
