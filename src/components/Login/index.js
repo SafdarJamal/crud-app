@@ -5,8 +5,8 @@ const Login = ({ setIsAuthenticated }) => {
   const adminEmail = 'admin@example.com';
   const adminPassword = 'qwerty';
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@example.com');
+  const [password, setPassword] = useState('qwerty');
 
   const handleLogin = e => {
     e.preventDefault();
@@ -22,8 +22,7 @@ const Login = ({ setIsAuthenticated }) => {
 
           Swal.fire({
             icon: 'success',
-            title: 'Successfully logged in.',
-            position: 'center',
+            title: 'Successfully logged in!',
             showConfirmButton: false,
             timer: 1500
           });
@@ -38,8 +37,8 @@ const Login = ({ setIsAuthenticated }) => {
         onClose: () => {
           Swal.fire({
             icon: 'error',
-            title: 'Incorrect email or password!',
-            position: 'center',
+            title: 'Error!',
+            text: 'Incorrect email or password.',
             showConfirmButton: true
           });
         }
