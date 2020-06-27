@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Table = ({ employeesData, handleEditClick, handleDelete }) => {
-  for (let i = 0; i < employeesData.length; i++) {
-    employeesData[i].id = i + 1;
-  }
+const Table = ({ employees, handleEdit, handleDelete }) => {
+  employees.forEach((employee, i) => {
+    employee.id = i + 1;
+  });
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -28,8 +28,8 @@ const Table = ({ employeesData, handleEditClick, handleDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {employeesData.length > 0 ? (
-            employeesData.map((employee, i) => (
+          {employees.length > 0 ? (
+            employees.map((employee, i) => (
               <tr key={employee.id}>
                 <td>{i + 1}</td>
                 <td>{employee.firstName}</td>
@@ -39,7 +39,7 @@ const Table = ({ employeesData, handleEditClick, handleDelete }) => {
                 <td>{employee.date} </td>
                 <td className="text-right">
                   <button
-                    onClick={() => handleEditClick(employee.id)}
+                    onClick={() => handleEdit(employee.id)}
                     className="button muted-button"
                   >
                     Edit
