@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const Add = ({ employeesData, onAddSuccess, handleAddCancel }) => {
+const Add = ({ employees, setEmployees, setIsAdding }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,14 +14,14 @@ const Add = ({ employeesData, onAddSuccess, handleAddCancel }) => {
     if (!firstName || !lastName || !email || !salary || !date) {
       return Swal.fire({
         icon: 'error',
-        title: 'All fields are required!',
-        position: 'center',
+        title: 'Error!',
+        text: 'All fields are required.',
         showConfirmButton: true
       });
     }
 
-    const id = employeesData.length + 1;
-    const newEmployeeData = {
+    const id = employees.length + 1;
+    const newEmployee = {
       id,
       firstName,
       lastName,
@@ -30,13 +30,14 @@ const Add = ({ employeesData, onAddSuccess, handleAddCancel }) => {
       date
     };
 
-    employeesData.push(newEmployeeData);
-    onAddSuccess(employeesData);
+    employees.push(newEmployee);
+    setEmployees(employees);
+    setIsAdding(false);
 
     Swal.fire({
       icon: 'success',
-      title: 'New employee added',
-      position: 'center',
+      title: 'Added!',
+      text: `${firstName} ${lastName}'s data has been Added.`,
       showConfirmButton: false,
       timer: 1500
     });
@@ -93,7 +94,7 @@ const Add = ({ employeesData, onAddSuccess, handleAddCancel }) => {
             className="muted-button"
             type="button"
             value="Cancel"
-            onClick={handleAddCancel}
+            onClick={() => setIsAdding(false)}
           />
         </div>
       </form>
