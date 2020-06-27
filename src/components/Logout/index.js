@@ -8,7 +8,7 @@ const Logout = ({ setIsAuthenticated }) => {
       title: 'Are you sure?',
       showCancelButton: true,
       confirmButtonText: 'Yes, log me out!',
-      cancelButtonText: 'No, keep me in!'
+      cancelButtonText: 'No, keep me logged in!'
     }).then(result => {
       if (result.value) {
         Swal.fire({
