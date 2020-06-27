@@ -4,20 +4,15 @@ import Login from '../Login';
 import Dashboard from '../Dashboard';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  const onLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
-
-  const onLogoutSuccess = () => {
-    setIsLoggedIn(false);
-  };
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <>
-      {!isLoggedIn && <Login onLoginSuccess={onLoginSuccess} />}
-      {isLoggedIn && <Dashboard onLogoutSuccess={onLogoutSuccess} />}
+      {isAuthenticated ? (
+        <Dashboard setIsAuthenticated={setIsAuthenticated} />
+      ) : (
+        <Login setIsAuthenticated={setIsAuthenticated} />
+      )}
     </>
   );
 };
