@@ -2,13 +2,13 @@ import React from 'react';
 
 import Logout from '../Logout';
 
-const Header = ({ handleAddClick, onLogoutSuccess }) => {
+const Header = ({ setIsAdding, setIsAuthenticated }) => {
   return (
     <header>
-      <h1>Employees Data</h1>
+      <h1>Employees Management System</h1>
       <div style={{ marginTop: '30px', marginBottom: '18px' }}>
-        <button onClick={handleAddClick}>Add Employee</button>
-        <Logout onLogoutSuccess={onLogoutSuccess} />
+        <button onClick={() => setIsAdding(true)}>Add Employee</button>
+        <Logout setIsAuthenticated={setIsAuthenticated} />
       </div>
     </header>
   );
