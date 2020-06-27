@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const Edit = ({ selectedEmployee, onUpdateSuccess, handleEditCancel }) => {
+const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
   const id = selectedEmployee.id;
 
   const [firstName, setFirstName] = useState(selectedEmployee.firstName);
@@ -16,13 +16,13 @@ const Edit = ({ selectedEmployee, onUpdateSuccess, handleEditCancel }) => {
     if (!firstName || !lastName || !email || !salary || !date) {
       return Swal.fire({
         icon: 'error',
-        title: 'All fields are required!',
-        position: 'center',
+        title: 'Error!',
+        text: 'All fields are required.',
         showConfirmButton: true
       });
     }
 
-    const employeeData = {
+    const employee = {
       id,
       firstName,
       lastName,
@@ -31,7 +31,23 @@ const Edit = ({ selectedEmployee, onUpdateSuccess, handleEditCancel }) => {
       date
     };
 
-    onUpdateSuccess(id, employeeData);
+    for (let i = 0; i < employees.length; i++) {
+      if (employees[i].id === id) {
+        employees.splice(i, 1, employee);
+        break;
+      }
+    }
+
+    setEmployees(employees);
+    setIsEditing(false);
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Updated!',
+      text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
+      showConfirmButton: false,
+      timer: 1500
+    });
   };
 
   return (
@@ -85,7 +101,7 @@ const Edit = ({ selectedEmployee, onUpdateSuccess, handleEditCancel }) => {
             className="muted-button"
             type="button"
             value="Cancel"
-            onClick={handleEditCancel}
+            onClick={() => setIsEditing(false)}
           />
         </div>
       </form>
