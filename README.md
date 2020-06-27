@@ -2,7 +2,7 @@
 
 A simple and beautiful [CRUD](https://www.codecademy.com/articles/what-is-crud) application built with [React](https://reactjs.org).
 
-![crud-app](https://user-images.githubusercontent.com/48409548/85933648-ee6def80-b8f2-11ea-8052-ceea59677c1c.PNG)
+![crud-app](https://user-images.githubusercontent.com/48409548/85933907-a0a6b680-b8f5-11ea-9ca4-ebd98d21df63.PNG)
 
 ## Development
 
