@@ -1,6 +1,9 @@
 # CRUD App
 
 <p>
+  <a href="https://github.com/SafdarJamal/crud-app/releases">
+    <img src="https://img.shields.io/github/v/release/SafdarJamal/crud-app" alt="GitHub Release (latest by date)" />
+  </a>
   <a href="https://github.com/SafdarJamal/crud-app/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/SafdarJamal/crud-app" alt="License" />
   </a>
