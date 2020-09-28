@@ -1,6 +1,10 @@
-# CRUD App
+<h1 align="center">
+  <a href="https://safdarjamal.github.io/crud-app">
+    CRUD App
+  </a>
+</h1>
 
-<p>
+<p align="center">
   <a href="https://github.com/SafdarJamal/crud-app/releases">
     <img src="https://img.shields.io/github/v/release/SafdarJamal/crud-app" alt="GitHub Release (latest by date)" />
   </a>
