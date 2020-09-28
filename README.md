@@ -1,5 +1,11 @@
 # CRUD App
 
+<p>
+  <a href="https://github.com/SafdarJamal/crud-app/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/SafdarJamal/crud-app" alt="License" />
+  </a>
+</p>
+
 A simple and beautiful [CRUD](https://www.codecademy.com/articles/what-is-crud) application built with [React](https://reactjs.org).
 
 ![crud-app](https://user-images.githubusercontent.com/48409548/85933907-a0a6b680-b8f5-11ea-9ca4-ebd98d21df63.PNG)
