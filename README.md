@@ -19,13 +19,15 @@ Install dependencies:
 npm install
 ```
 
-Finally, you need to start a local web server. Run:
+Now, you can start a local web server by running:
 
 ```
 npm start
 ```
 
-#### npm scripts
+and then you can open http://localhost:3000 to view it in the browser.
+
+#### Available Scripts
 
 | Script        | Description                                                             |
 | ------------- | ----------------------------------------------------------------------- |
@@ -36,4 +38,4 @@ npm start
 
 ## License
 
-CRUD App is open source software [licensed as MIT](https://github.com/SafdarJamal/crud-app/blob/master/LICENSE).
+CRUD App is open-source software licensed under the [MIT License](https://github.com/SafdarJamal/crud-app/blob/master/LICENSE).
