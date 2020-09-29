@@ -17,7 +17,7 @@
   A simple and beautiful <a href="https://www.codecademy.com/articles/what-is-crud">CRUD</a> application built with <a href="https://reactjs.org">React</a>.
 </p>
 
-![crud-app](https://user-images.githubusercontent.com/48409548/85933907-a0a6b680-b8f5-11ea-9ca4-ebd98d21df63.PNG)
+![crud-app](https://user-images.githubusercontent.com/48409548/94567114-8aa5ea80-0284-11eb-99f6-87401b099848.png)
 
 ## Development
 
