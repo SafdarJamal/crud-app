@@ -5,6 +5,9 @@
 </h1>
 
 <p align="center">
+  <a href="https://github.com/SafdarJamal/crud-app/actions?query=workflow%3A%22Node.js+CI%22">
+    <img src="https://github.com/SafdarJamal/crud-app/workflows/Node.js%20CI/badge.svg" alt="Node.js CI" />
+  </a>
   <a href="https://github.com/SafdarJamal/crud-app/releases">
     <img src="https://img.shields.io/github/v/release/SafdarJamal/crud-app" alt="GitHub Release (latest by date)" />
   </a>
