@@ -12,6 +12,7 @@ const Login = ({ setIsAuthenticated }) => {
     e.preventDefault();
 
     if (email === adminEmail && password === adminPassword) {
+      sessionStorage.setItem('login',true);
       Swal.fire({
         timer: 1500,
         onBeforeOpen: () => {

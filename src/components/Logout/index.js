@@ -11,6 +11,7 @@ const Logout = ({ setIsAuthenticated }) => {
       cancelButtonText: 'No, keep me logged in!'
     }).then(result => {
       if (result.value) {
+        sessionStorage.removeItem('login')
         Swal.fire({
           timer: 1500,
           onBeforeOpen: () => {

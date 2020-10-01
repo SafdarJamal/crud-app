@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import Login from '../Login';
 import Dashboard from '../Dashboard';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState();
+
+  const checkLogin = () => {
+    let login = sessionStorage.getItem('login');
+    if(login === null) {
+      setIsAuthenticated(false)
+    } else {
+      setIsAuthenticated(true);
+    }
+  }
+
+  useEffect(() => {
+    checkLogin();
+  },[])
 
   return (
     <>
