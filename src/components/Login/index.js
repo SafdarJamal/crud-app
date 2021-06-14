@@ -14,6 +14,7 @@ const Login = ({ setIsAuthenticated }) => {
     if (email === adminEmail && password === adminPassword) {
       Swal.fire({
         timer: 1500,
+        showConfirmButton: false,
         onBeforeOpen: () => {
           Swal.showLoading();
         },
@@ -24,13 +25,14 @@ const Login = ({ setIsAuthenticated }) => {
             icon: 'success',
             title: 'Successfully logged in!',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
-        }
+        },
       });
     } else {
       Swal.fire({
         timer: 1500,
+        showConfirmButton: false,
         onBeforeOpen: () => {
           Swal.showLoading();
         },
@@ -39,9 +41,9 @@ const Login = ({ setIsAuthenticated }) => {
             icon: 'error',
             title: 'Error!',
             text: 'Incorrect email or password.',
-            showConfirmButton: true
+            showConfirmButton: true,
           });
-        }
+        },
       });
     }
   };
