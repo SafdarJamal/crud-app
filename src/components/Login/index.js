@@ -15,10 +15,10 @@ const Login = ({ setIsAuthenticated }) => {
       Swal.fire({
         timer: 1500,
         showConfirmButton: false,
-        onBeforeOpen: () => {
+        willOpen: () => {
           Swal.showLoading();
         },
-        onClose: () => {
+        willClose: () => {
           setIsAuthenticated(true);
 
           Swal.fire({
@@ -33,10 +33,10 @@ const Login = ({ setIsAuthenticated }) => {
       Swal.fire({
         timer: 1500,
         showConfirmButton: false,
-        onBeforeOpen: () => {
+        willOpen: () => {
           Swal.showLoading();
         },
-        onClose: () => {
+        willClose: () => {
           Swal.fire({
             icon: 'error',
             title: 'Error!',
