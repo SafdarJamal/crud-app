@@ -14,10 +14,10 @@ const Logout = ({ setIsAuthenticated }) => {
         Swal.fire({
           timer: 1500,
           showConfirmButton: false,
-          onBeforeOpen: () => {
+          willOpen: () => {
             Swal.showLoading();
           },
-          onClose: () => {
+          willClose: () => {
             setIsAuthenticated(false);
           },
         });
