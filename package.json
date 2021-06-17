@@ -4,12 +4,12 @@
   "private": true,
   "homepage": "https://safdarjamal.github.io/crud-app/",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "4.0.3",
     "sweetalert2": "^11.0.17"
   },
   "scripts": {
@@ -21,7 +21,10 @@
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
