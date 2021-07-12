@@ -60,6 +60,10 @@ and then you can open http://localhost:3000 to view it in the browser.
 | npm run build | Builds the app for production to the `build` folder.                    |
 | npm run eject | This command will remove the single build dependency from your project. |
 
+## Credits
+
+CRUD App is built and maintained by [Safdar Jamal](https://safdarjamal.github.io).
+
 ## License
 
 CRUD App is open-source software licensed under the [MIT License](https://github.com/SafdarJamal/crud-app/blob/master/LICENSE).
