@@ -5,10 +5,10 @@ const Logout = ({ setIsAuthenticated }) => {
   const handleLogout = () => {
     Swal.fire({
       icon: 'question',
-      title: 'Are you sure?',
+      title: 'Logging Out',
+      text: 'Are you sure you want to log out?',
       showCancelButton: true,
-      confirmButtonText: 'Yes, log me out!',
-      cancelButtonText: 'No, keep me logged in!',
+      confirmButtonText: 'Yes',
     }).then(result => {
       if (result.value) {
         Swal.fire({
