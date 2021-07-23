@@ -28,7 +28,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       text: "You won't be able to revert this!",
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it!'
+      cancelButtonText: 'No, cancel!',
     }).then(result => {
       if (result.value) {
         const [employee] = employees.filter(employee => employee.id === id);
@@ -38,7 +38,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
           title: 'Deleted!',
           text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
 
         setEmployees(employees.filter(employee => employee.id !== id));
