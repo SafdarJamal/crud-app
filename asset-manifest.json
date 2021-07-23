@@ -1,22 +1,20 @@
 {
   "files": {
-    "main.css": "/crud-app/static/css/main.9447384d.chunk.css",
-    "main.js": "/crud-app/static/js/main.21358c51.chunk.js",
-    "main.js.map": "/crud-app/static/js/main.21358c51.chunk.js.map",
-    "runtime-main.js": "/crud-app/static/js/runtime-main.b590a2b6.js",
-    "runtime-main.js.map": "/crud-app/static/js/runtime-main.b590a2b6.js.map",
-    "static/js/2.cd51b120.chunk.js": "/crud-app/static/js/2.cd51b120.chunk.js",
-    "static/js/2.cd51b120.chunk.js.map": "/crud-app/static/js/2.cd51b120.chunk.js.map",
+    "main.css": "/crud-app/static/css/main.55102349.chunk.css",
+    "main.js": "/crud-app/static/js/main.ba2c55da.chunk.js",
+    "main.js.map": "/crud-app/static/js/main.ba2c55da.chunk.js.map",
+    "runtime-main.js": "/crud-app/static/js/runtime-main.c126efd9.js",
+    "runtime-main.js.map": "/crud-app/static/js/runtime-main.c126efd9.js.map",
+    "static/js/2.fe02486d.chunk.js": "/crud-app/static/js/2.fe02486d.chunk.js",
+    "static/js/2.fe02486d.chunk.js.map": "/crud-app/static/js/2.fe02486d.chunk.js.map",
     "index.html": "/crud-app/index.html",
-    "precache-manifest.cdfd779d64b097b1a14ab20b4a3c1ef1.js": "/crud-app/precache-manifest.cdfd779d64b097b1a14ab20b4a3c1ef1.js",
-    "service-worker.js": "/crud-app/service-worker.js",
-    "static/css/main.9447384d.chunk.css.map": "/crud-app/static/css/main.9447384d.chunk.css.map",
-    "static/js/2.cd51b120.chunk.js.LICENSE.txt": "/crud-app/static/js/2.cd51b120.chunk.js.LICENSE.txt"
+    "static/css/main.55102349.chunk.css.map": "/crud-app/static/css/main.55102349.chunk.css.map",
+    "static/js/2.fe02486d.chunk.js.LICENSE.txt": "/crud-app/static/js/2.fe02486d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b590a2b6.js",
-    "static/js/2.cd51b120.chunk.js",
-    "static/css/main.9447384d.chunk.css",
-    "static/js/main.21358c51.chunk.js"
+    "static/js/runtime-main.c126efd9.js",
+    "static/js/2.fe02486d.chunk.js",
+    "static/css/main.55102349.chunk.css",
+    "static/js/main.ba2c55da.chunk.js"
   ]
 }
