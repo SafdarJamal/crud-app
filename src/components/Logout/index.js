@@ -18,6 +18,7 @@ const Logout = ({ setIsAuthenticated }) => {
             Swal.showLoading();
           },
           willClose: () => {
+            localStorage.setItem('isAuthenticated', false);
             setIsAuthenticated(false);
           },
         });
