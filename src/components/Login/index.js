@@ -19,7 +19,7 @@ const Login = ({ setIsAuthenticated }) => {
           Swal.showLoading();
         },
         willClose: () => {
-          localStorage.setItem('isAuthenticated', true);
+          localStorage.setItem('is_authenticated', true);
           setIsAuthenticated(true);
 
           Swal.fire({
