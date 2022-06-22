@@ -18,7 +18,7 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
         icon: 'error',
         title: 'Error!',
         text: 'All fields are required.',
-        showConfirmButton: true
+        showConfirmButton: true,
       });
     }
 
@@ -28,7 +28,7 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       lastName,
       email,
       salary,
-      date
+      date,
     };
 
     for (let i = 0; i < employees.length; i++) {
@@ -38,6 +38,7 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       }
     }
 
+    localStorage.setItem('employees_data', JSON.stringify(employees));
     setEmployees(employees);
     setIsEditing(false);
 
@@ -46,7 +47,7 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       title: 'Updated!',
       text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 import Header from './Header';
@@ -13,6 +13,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('employees_data'));
+    if (Object.keys(data).length !== 0) setEmployees(data);
+  }, []);
 
   const handleEdit = id => {
     const [employee] = employees.filter(employee => employee.id === id);
@@ -41,7 +46,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
           timer: 1500,
         });
 
-        setEmployees(employees.filter(employee => employee.id !== id));
+        const employeesCopy = employees.filter(employee => employee.id !== id);
+        localStorage.setItem('employees_data', JSON.stringify(employeesCopy));
+        setEmployees(employeesCopy);
       }
     });
   };

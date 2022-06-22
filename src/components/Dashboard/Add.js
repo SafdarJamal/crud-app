@@ -16,7 +16,7 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
         icon: 'error',
         title: 'Error!',
         text: 'All fields are required.',
-        showConfirmButton: true
+        showConfirmButton: true,
       });
     }
 
@@ -27,10 +27,11 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
       lastName,
       email,
       salary,
-      date
+      date,
     };
 
     employees.push(newEmployee);
+    localStorage.setItem('employees_data', JSON.stringify(employees));
     setEmployees(employees);
     setIsAdding(false);
 
@@ -39,7 +40,7 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
       title: 'Added!',
       text: `${firstName} ${lastName}'s data has been Added.`,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
   };
 

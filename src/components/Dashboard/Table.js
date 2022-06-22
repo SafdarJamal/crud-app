@@ -8,7 +8,7 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: null
+    minimumFractionDigits: null,
   });
 
   return (
