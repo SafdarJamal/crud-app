@@ -16,7 +16,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('employees_data'));
-    if (Object.keys(data).length !== 0) setEmployees(data);
+    if (data !== null && Object.keys(data).length !== 0) setEmployees(data);
   }, []);
 
   const handleEdit = id => {
