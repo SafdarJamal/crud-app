@@ -1,14 +1,12 @@
-import React from 'react';
+import { TableProps } from "./types";
 
-const Table = ({ employees, handleEdit, handleDelete }) => {
-  employees.forEach((employee, i) => {
-    employee.id = i + 1;
-  });
+const Table = ({ employees, handleEdit, handleDelete }: TableProps) => {
+  employees.forEach((employee, i) => (employee.id = i + 1));
 
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: null,
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: undefined,
   });
 
   return (
@@ -28,14 +26,14 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {employees.length > 0 ? (
+          {employees && employees.length > 0 ? (
             employees.map((employee, i) => (
               <tr key={employee.id}>
                 <td>{i + 1}</td>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{employee.email}</td>
-                <td>{formatter.format(employee.salary)}</td>
+                <td>{formatter.format(Number.parseInt(employee.salary))}</td>
                 <td>{employee.date} </td>
                 <td className="text-right">
                   <button
