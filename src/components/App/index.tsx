@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import Login from '../Login';
-import Dashboard from '../Dashboard';
+import Login from "../Login";
+import Dashboard from "../Dashboard";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    setIsAuthenticated(JSON.parse(localStorage.getItem('is_authenticated')));
+    setIsAuthenticated(JSON.parse(localStorage.getItem("is_authenticated")!));
   }, []);
 
   return (
