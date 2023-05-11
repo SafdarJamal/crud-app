@@ -31,14 +31,8 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       date,
     };
 
-    for (let i = 0; i < employees.length; i++) {
-      if (employees[i].id === id) {
-        employees.splice(i, 1, employee);
-        break;
-      }
-    }
+    // TODO: Update document
 
-    localStorage.setItem('employees_data', JSON.stringify(employees));
     setEmployees(employees);
     setIsEditing(false);
 

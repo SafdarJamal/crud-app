@@ -1,9 +1,6 @@
 import React from 'react';
 
 const Table = ({ employees, handleEdit, handleDelete }) => {
-  employees.forEach((employee, i) => {
-    employee.id = i + 1;
-  });
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -16,7 +13,7 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
       <table className="striped-table">
         <thead>
           <tr>
-            <th>No.</th>
+            <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -28,10 +25,10 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {employees.length > 0 ? (
+          {employees ? (
             employees.map((employee, i) => (
               <tr key={employee.id}>
-                <td>{i + 1}</td>
+                <td>{employee.id}</td>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{employee.email}</td>

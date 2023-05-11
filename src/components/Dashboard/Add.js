@@ -20,9 +20,7 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
       });
     }
 
-    const id = employees.length + 1;
     const newEmployee = {
-      id,
       firstName,
       lastName,
       email,
@@ -31,7 +29,9 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
     };
 
     employees.push(newEmployee);
-    localStorage.setItem('employees_data', JSON.stringify(employees));
+
+    // TODO: Add doc to DB
+
     setEmployees(employees);
     setIsAdding(false);
 

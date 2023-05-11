@@ -15,8 +15,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('employees_data'));
-    if (data !== null && Object.keys(data).length !== 0) setEmployees(data);
+    // TODO: create getEmployees function and call it here
   }, []);
 
   const handleEdit = id => {
@@ -38,6 +37,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
       if (result.value) {
         const [employee] = employees.filter(employee => employee.id === id);
 
+        // TODO delete document
+
         Swal.fire({
           icon: 'success',
           title: 'Deleted!',
@@ -47,7 +48,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
         });
 
         const employeesCopy = employees.filter(employee => employee.id !== id);
-        localStorage.setItem('employees_data', JSON.stringify(employeesCopy));
         setEmployees(employeesCopy);
       }
     });
