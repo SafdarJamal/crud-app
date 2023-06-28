@@ -17,7 +17,7 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
         <thead>
           <tr>
             <th>No.</th>
-            <th>First Name</th>
+            <th>First Name Chaitanya</th>
             <th>Last Name</th>
             <th>Email</th>
             <th>Salary</th>
