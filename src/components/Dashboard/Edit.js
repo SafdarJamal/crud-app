@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { setDoc, doc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
-const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
-  const id = selectedEmployee.id;
-
+const Edit = ({ selectedEmployee, setEmployees, setIsEditing }) => {
   const [firstName, setFirstName] = useState(selectedEmployee.firstName);
   const [lastName, setLastName] = useState(selectedEmployee.lastName);
   const [email, setEmail] = useState(selectedEmployee.email);
   const [salary, setSalary] = useState(selectedEmployee.salary);
   const [date, setDate] = useState(selectedEmployee.date);
 
-  const handleUpdate = e => {
+  const handleUpdate = async e => {
     e.preventDefault();
 
     if (!firstName || !lastName || !email || !salary || !date) {
@@ -22,8 +22,10 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       });
     }
 
+    
+
     const employee = {
-      id,
+      id: selectedEmployee.id,
       firstName,
       lastName,
       email,
@@ -31,24 +33,30 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       date,
     };
 
-    for (let i = 0; i < employees.length; i++) {
-      if (employees[i].id === id) {
-        employees.splice(i, 1, employee);
-        break;
-      }
+    try {
+      await setDoc(doc(db, 'employees', selectedEmployee.id), employee);
+
+      setEmployees(prevEmployees => prevEmployees.map(prevEmployee => {
+        return prevEmployee.id === selectedEmployee.id ? employee : prevEmployee;
+      }));
+
+      setIsEditing(false);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error('Error updating employee: ', error);
+      Swal.fire({
+        icon: 'info',
+        title: 'Selected Employee ID',
+        text: selectedEmployee.id,
+      });
     }
-
-    localStorage.setItem('employees_data', JSON.stringify(employees));
-    setEmployees(employees);
-    setIsEditing(false);
-
-    Swal.fire({
-      icon: 'success',
-      title: 'Updated!',
-      text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
   };
 
   return (

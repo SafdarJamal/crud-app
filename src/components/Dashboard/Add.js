@@ -1,103 +1,117 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { v4 as uuidv4 } from 'uuid';
 
-const Add = ({ employees, setEmployees, setIsAdding }) => {
+const Add = ({ setEmployees, setIsAdding }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [salary, setSalary] = useState('');
   const [date, setDate] = useState('');
 
-  const handleAdd = e => {
+  const handleAdd = async e => {
     e.preventDefault();
-
+  
     if (!firstName || !lastName || !email || !salary || !date) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'All fields are required.',
-        showConfirmButton: true,
-      });
+      alert('Todos los campos son requeridos.');
+      return;
     }
-
-    const id = employees.length + 1;
-    const newEmployee = {
-      id,
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
-    };
-
-    employees.push(newEmployee);
-    localStorage.setItem('employees_data', JSON.stringify(employees));
-    setEmployees(employees);
-    setIsAdding(false);
-
-    Swal.fire({
-      icon: 'success',
-      title: 'Added!',
-      text: `${firstName} ${lastName}'s data has been Added.`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+  
+    try {
+      const employeeId = uuidv4(); // Generamos una nueva UUID
+  
+      await setDoc(doc(db, 'employees', employeeId), {
+        id: employeeId,
+        firstName,
+        lastName,
+        email,
+        salary,
+        date,
+      });
+  
+      setEmployees(prevEmployees => [
+        ...prevEmployees,
+        {
+          id: employeeId,
+          firstName,
+          lastName,
+          email,
+          salary,
+          date,
+        },
+      ]);
+  
+      setIsAdding(false);
+  
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setSalary('');
+      setDate('');
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Registered!',
+        text: 'El empleado ha sido registrado satisfactoriamente.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+  
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   };
-
+  
+  
   return (
-    <div className="small-container">
+    <div className="add-form">
+      <h2>Agregar Nuevo Empleado</h2>
       <form onSubmit={handleAdd}>
-        <h1>Add Employee</h1>
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">Nombre:</label>
         <input
-          id="firstName"
           type="text"
-          name="firstName"
+          id="firstName"
           value={firstName}
           onChange={e => setFirstName(e.target.value)}
         />
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName">Apellido:</label>
         <input
-          id="lastName"
           type="text"
-          name="lastName"
+          id="lastName"
           value={lastName}
           onChange={e => setLastName(e.target.value)}
         />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email:</label>
         <input
-          id="email"
           type="email"
-          name="email"
+          id="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <label htmlFor="salary">Salary ($)</label>
+        <label htmlFor="salary">Salario:</label>
         <input
-          id="salary"
           type="number"
-          name="salary"
+          id="salary"
           value={salary}
           onChange={e => setSalary(e.target.value)}
         />
-        <label htmlFor="date">Date</label>
+        <label htmlFor="date">Fecha:</label>
         <input
-          id="date"
           type="date"
-          name="date"
+          id="date"
           value={date}
           onChange={e => setDate(e.target.value)}
         />
-        <div style={{ marginTop: '30px' }}>
-          <input type="submit" value="Add" />
-          <input
+        <button type="submit">Agregar</button>
+        <input
             style={{ marginLeft: '12px' }}
             className="muted-button"
             type="button"
             value="Cancel"
             onClick={() => setIsAdding(false)}
           />
-        </div>
       </form>
     </div>
   );
